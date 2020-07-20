@@ -1,0 +1,24 @@
+$primary-color: #42414e;
+$secondary-color: #4ecdc4;
+$warning-color: #ff6b6b;
+$info-color: #ffe66d;
+
+$text-color: #f7fff7;
+$background-primary: #f3f3f3;
+$background-secondary: #ffffff;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:export {
+  primary_color: $primary-color;
+  secondary_color: $secondary-color;
+  warning_color: $warning-color;
+  info_color: $info-color;
+  text_color: $text-color;
+  background_primary: $background-primary;
+  background_secondary: $background-secondary;
+}

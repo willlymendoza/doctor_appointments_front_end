@@ -1,0 +1,22 @@
+@import "./assets/scss/config";
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr minmax(1640px, 1fr) 1fr;
+  grid-template-rows: 70px 1fr 137px;
+  grid-template-areas:
+    ". header ."
+    ". main ."
+    ". footer .";
+  justify-content: center;
+}
+
+@media screen and (max-width: 1639px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+  }
+}
