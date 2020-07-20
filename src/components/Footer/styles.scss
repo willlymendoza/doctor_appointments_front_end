@@ -1,0 +1,17 @@
+@import "../../assets/scss/config";
+
+.footer-container {
+  grid-area: 3 / 1 / 4 / 4;
+  background: $primary-color;
+}
+
+.footer-content {
+  grid-area: footer;
+  padding: 0 40px;
+  background: $primary-color;
+  color: $text-color;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

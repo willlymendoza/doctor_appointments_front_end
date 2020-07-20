@@ -1,0 +1,35 @@
+@import "../../assets/scss/config";
+
+.header-container {
+  grid-area: 1 / 1 / 2 / 4;
+  background: $primary-color;
+}
+
+.header-content {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas: "logo nav-menu";
+  background: $primary-color;
+  color: $text-color;
+  padding: 0 40px;
+  align-items: center;
+
+  .logo {
+    grid-area: logo;
+    text-transform: uppercase;
+  }
+
+  .nav-bar {
+    grid-area: nav-menu;
+    text-align: right;
+
+    ul {
+      li {
+        list-style: none;
+        display: inline-block;
+        margin-left: 20px;
+      }
+    }
+  }
+}
