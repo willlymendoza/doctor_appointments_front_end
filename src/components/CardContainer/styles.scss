@@ -1,0 +1,19 @@
+@import "../../assets/scss/config";
+
+.card-container {
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.16);
+  overflow: hidden;
+
+  .card-header {
+    color: $text-color;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+  }
+
+  .card-content {
+    padding: 30px;
+  }
+}
