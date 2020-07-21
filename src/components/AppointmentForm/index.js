@@ -10,7 +10,7 @@ const options = [
 ];
 
 const AppointmentForm = () => {
-  const handleSelectChange = (newValue: any, actionMeta: any) => {
+  const handleSelectChange = (newValue, actionMeta) => {
     console.log(newValue);
   };
 
