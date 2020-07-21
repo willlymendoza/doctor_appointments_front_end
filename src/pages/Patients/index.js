@@ -1,7 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 const Patients = () => {
-  return <div></div>;
+  return (
+    <Fragment>
+      <h1>Patients</h1>
+    </Fragment>
+  );
 };
 
 export default Patients;
