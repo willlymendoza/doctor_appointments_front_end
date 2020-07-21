@@ -1,7 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 const Users = () => {
-  return <div></div>;
+  return (
+    <Fragment>
+      <h1>Users</h1>
+    </Fragment>
+  );
 };
 
 export default Users;
