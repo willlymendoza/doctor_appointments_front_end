@@ -1,9 +1,12 @@
 import React, { Fragment } from "react";
+import PageTitle from "../../components/PageTitle";
+import PatientsListTable from "../../components/PatientsListTable";
 
 const Patients = () => {
   return (
     <Fragment>
-      <h1>Patients</h1>
+      <PageTitle title="PATIENTS" />
+      <PatientsListTable />
     </Fragment>
   );
 };

@@ -1,0 +1,46 @@
+@import "../../assets/scss/config";
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .edit_item {
+    color: $info-color;
+  }
+
+  .view_item {
+    color: $secondary-color;
+  }
+}
+
+.pagination {
+  margin-top: 50px;
+
+  li {
+    display: inline-block;
+    padding: 8px 15px;
+    border: 1px solid $border-color;
+
+    &.active {
+      background: $secondary-color;
+      border: none;
+      padding: 9px 15px;
+
+      a {
+        color: $text-color;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: $primary-color;
+      font-weight: bold;
+    }
+  }
+
+  .chevron {
+    color: $secondary-color;
+    font-weight: bold;
+  }
+}
