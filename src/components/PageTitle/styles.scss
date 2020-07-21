@@ -1,0 +1,16 @@
+@import "../../assets/scss/config";
+
+.page-title {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  color: $primary-color;
+  margin-bottom: 50px;
+
+  span {
+    width: 258px;
+    border-bottom: 1px solid $primary-color;
+  }
+}
