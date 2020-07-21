@@ -1,23 +1,60 @@
 import React from "react";
 import CardContainer from "../../components/CardContainer";
+import Select from "react-select";
 import "./styles.scss";
 
+const options = [
+  { id: 1, first_name: "Jhon", last_name: "Doe" },
+  { id: 2, first_name: "Juan", last_name: "Doe" },
+  { id: 3, first_name: "Mic", last_name: "Doe" },
+];
+
 const AppointmentForm = () => {
+  const handleSelectChange = (newValue: any, actionMeta: any) => {
+    console.log(newValue);
+  };
+
+  const customSelectStyles = {
+    valueContainer: () => ({
+      height: 37,
+      paddingLeft: 10,
+    }),
+    input: () => ({
+      margin: "auto 0",
+    }),
+  };
+
   return (
     <div className="appointment-form-container">
       <CardContainer title="Appointment Info" color="warning_color">
         <form className="form">
           <div className="form-group full-width">
             <label>Patient</label>
-            <select name="patient">
-              <option value="0">Dr. Jhon Doe</option>
-            </select>
+            <Select
+              styles={customSelectStyles}
+              options={options}
+              onChange={handleSelectChange}
+              isClearable
+              maxMenuHeight={150}
+              getOptionLabel={(option) =>
+                `${option.first_name} ${option.last_name}`
+              }
+              getOptionValue={(option) => option["id"]}
+            />
           </div>
           <div className="form-group full-width">
             <label>Doctor</label>
-            <select name="doctor">
-              <option value="0">Dr. Jhon Doe</option>
-            </select>
+            <Select
+              styles={customSelectStyles}
+              options={options}
+              onChange={handleSelectChange}
+              isClearable
+              maxMenuHeight={150}
+              getOptionLabel={(option) =>
+                `${option.first_name} ${option.last_name}`
+              }
+              getOptionValue={(option) => option["id"]}
+            />
           </div>
           <div className="form-group full-width">
             <label>Observations</label>
