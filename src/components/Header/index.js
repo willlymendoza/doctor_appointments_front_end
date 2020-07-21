@@ -1,4 +1,6 @@
 import React, { Fragment } from "react";
+import NavBar from "../NavBar";
+import Logo from "../Logo";
 import "./styles.scss";
 
 const Header = () => {
@@ -6,16 +8,8 @@ const Header = () => {
     <Fragment>
       <div className="header-container"></div>
       <header className="header-content">
-        <div className="logo">
-          <h1>Logo here</h1>
-        </div>
-        <nav className="nav-bar">
-          <ul>
-            <li>Appointments</li>
-            <li>Patients</li>
-            <li>Users</li>
-          </ul>
-        </nav>
+        <Logo />
+        <NavBar />
       </header>
     </Fragment>
   );
