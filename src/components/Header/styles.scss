@@ -14,22 +14,4 @@
   color: $text-color;
   padding: 0 40px;
   align-items: center;
-
-  .logo {
-    grid-area: logo;
-    text-transform: uppercase;
-  }
-
-  .nav-bar {
-    grid-area: nav-menu;
-    text-align: right;
-
-    ul {
-      li {
-        list-style: none;
-        display: inline-block;
-        margin-left: 20px;
-      }
-    }
-  }
 }
