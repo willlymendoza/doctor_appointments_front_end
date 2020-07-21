@@ -1,0 +1,12 @@
+@import "../../assets/scss/config";
+
+.dashboard-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: $primary-color;
+  border-radius: 25px;
+  color: $text-color;
+  height: 250px;
+}
