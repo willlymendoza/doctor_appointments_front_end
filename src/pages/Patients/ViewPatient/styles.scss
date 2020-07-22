@@ -1,0 +1,26 @@
+@import "../../../assets/scss/config";
+
+.patient-info-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 50px;
+
+  .patient-form-container {
+    width: 100%;
+  }
+
+  .list-container {
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 50px;
+
+      span {
+        a {
+          color: $secondary-color;
+        }
+      }
+    }
+  }
+}
