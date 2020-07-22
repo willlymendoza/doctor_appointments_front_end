@@ -3,10 +3,20 @@ import CardContainer from "../../components/CardContainer";
 import CustomPagination from "../../components/CustomPagination";
 
 import "./styles.scss";
+import { NavLink } from "react-router-dom";
 
 const AppointmentsListTable = () => {
   return (
     <Fragment>
+      <NavLink to="/appointments/add">
+        <button
+          type="button"
+          className="button bg-warning-color"
+          style={{ marginBottom: 10 }}
+        >
+          New
+        </button>
+      </NavLink>
       <CardContainer title="List Of Appointments" color="warning_color">
         <div className="table-grid table-header">
           <label>First Name</label>
