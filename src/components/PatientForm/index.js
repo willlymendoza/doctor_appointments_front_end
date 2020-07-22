@@ -1,10 +1,9 @@
 import React from "react";
 import CardContainer from "../../components/CardContainer";
-import "./styles.scss";
 
 const PatientForm = ({ buttonText }) => {
   return (
-    <div className="patient-form-container">
+    <div className="form-container">
       <CardContainer title="Patient Info" color="secondary_color">
         <form className="form">
           <div className="form-group">
@@ -43,8 +42,11 @@ const PatientForm = ({ buttonText }) => {
             <label>Sex</label>
             <input name="sex" />
           </div>
-          <div className="form-group">
-            <button type="submit" className="button bg-secondary-color">
+          <div className="form-group button-container">
+            <button
+              type="submit"
+              className="button button-right bg-secondary-color"
+            >
               {buttonText}
             </button>
           </div>

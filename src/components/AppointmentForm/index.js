@@ -1,7 +1,6 @@
 import React from "react";
 import CardContainer from "../../components/CardContainer";
 import Select from "react-select";
-import "./styles.scss";
 
 const options = [
   { id: 1, first_name: "Jhon", last_name: "Doe" },
@@ -25,7 +24,7 @@ const AppointmentForm = ({ buttonText }) => {
   };
 
   return (
-    <div className="appointment-form-container">
+    <div className="form-container">
       <CardContainer title="Appointment Info" color="warning_color">
         <form className="form">
           <div className="form-group full-width">
@@ -69,8 +68,10 @@ const AppointmentForm = ({ buttonText }) => {
             <input type="time" name="email" />
           </div>
 
-          <div className="form-group">
-            <button className="button bg-warning-color">add</button>
+          <div className="form-group button-container">
+            <button className="button button-right bg-warning-color">
+              add
+            </button>
           </div>
         </form>
       </CardContainer>
