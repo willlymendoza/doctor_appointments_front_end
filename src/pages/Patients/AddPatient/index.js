@@ -6,7 +6,7 @@ const AddPatient = () => {
   return (
     <Fragment>
       <PageTitle title="ADD PATIENT" />
-      <PatientForm />
+      <PatientForm buttonText="add" />
     </Fragment>
   );
 };
