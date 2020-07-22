@@ -3,10 +3,20 @@ import CardContainer from "../../components/CardContainer";
 import CustomPagination from "../../components/CustomPagination";
 
 import "./styles.scss";
+import { NavLink } from "react-router-dom";
 
 const PatientsListTable = () => {
   return (
     <Fragment>
+      <NavLink to="/patients/add">
+        <button
+          type="button"
+          className="button bg-secondary-color"
+          style={{ marginBottom: 10 }}
+        >
+          New
+        </button>
+      </NavLink>
       <CardContainer title="List Of Patients" color="secondary_color">
         <div className="table-grid table-header">
           <label>First Name</label>
