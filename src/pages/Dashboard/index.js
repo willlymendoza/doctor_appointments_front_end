@@ -62,7 +62,7 @@ const Dashboard = () => {
             <span>Dr. Jhon Doe</span>
           </div>
           <div className="table-grid table-content" style={{ marginTop: 50 }}>
-            <button className="button bg-secondary-color">
+            <button className="button button-right bg-secondary-color">
               view full list
             </button>
           </div>
@@ -101,7 +101,9 @@ const Dashboard = () => {
             <span>09:30</span>
           </div>
           <div className="table-grid table-content" style={{ marginTop: 50 }}>
-            <button className="button bg-warning-color">view full list</button>
+            <button className="button button-right bg-warning-color">
+              view full list
+            </button>
           </div>
         </CardContainer>
       </div>
