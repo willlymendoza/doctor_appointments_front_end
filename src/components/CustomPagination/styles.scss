@@ -1,0 +1,76 @@
+@import "../../assets/scss/config";
+
+.pagination {
+  margin-top: 50px;
+
+  &.secondary {
+    li {
+      &.active {
+        a {
+          background: $secondary-color;
+        }
+      }
+
+      a {
+        &:hover {
+          background: $secondary-color;
+        }
+      }
+    }
+  }
+
+  &.warning {
+    li {
+      &.active {
+        a {
+          background: $warning-color;
+        }
+      }
+
+      a {
+        &:hover {
+          background: $warning-color;
+        }
+      }
+    }
+  }
+
+  li {
+    display: inline-block;
+
+    &.active {
+      a {
+        background: $secondary-color;
+        color: $text-color;
+        border: none;
+        padding: 9px 15px;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: $primary-color;
+      font-weight: bold;
+      padding: 8px 15px;
+      border: 1px solid $border-color;
+
+      &:hover {
+        color: $text-color !important;
+        border: none;
+        padding: 9px 15px;
+      }
+    }
+  }
+
+  .chevron {
+    font-weight: bold;
+
+    &.secondary {
+      color: $secondary-color;
+    }
+
+    &.warning {
+      color: $warning-color;
+    }
+  }
+}
