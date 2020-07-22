@@ -10,7 +10,7 @@ const options = [
   { id: 3, first_name: "Mic", last_name: "Doe" },
 ];
 
-const AppointmentForm = () => {
+const AppointmentForm = ({ buttonText }) => {
   const handleSelectChange = (newValue, actionMeta) => {
     console.log(newValue);
   };
@@ -70,7 +70,7 @@ const AppointmentForm = () => {
             <input type="time" name="email" />
           </div>
 
-          <SubmitButton text="add" colorClass="warning" />
+          <SubmitButton text={buttonText} colorClass="warning" />
         </form>
       </CardContainer>
     </div>
