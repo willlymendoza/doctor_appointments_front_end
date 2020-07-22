@@ -1,0 +1,15 @@
+@import "../../assets/scss/config";
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  .edit_item {
+    color: $info-color;
+  }
+
+  .view_item {
+    color: $secondary-color;
+  }
+}
