@@ -13,7 +13,7 @@ const ViewAppointment = () => {
     <Fragment>
       <PageTitle title={`2020-07-17 15:30 -- ${id}`} />
       <div className="appointment-info-container">
-        <AppointmentForm buttonText="edit" />
+        <AppointmentForm />
         <CardContainer title="Patient Info" color="secondary_color">
           <div className="list-container">
             <div>

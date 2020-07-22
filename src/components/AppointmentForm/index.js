@@ -8,7 +8,7 @@ const options = [
   { id: 3, first_name: "Mic", last_name: "Doe" },
 ];
 
-const AppointmentForm = ({ buttonText }) => {
+const AppointmentForm = () => {
   const handleSelectChange = (newValue, actionMeta) => {
     console.log(newValue);
   };

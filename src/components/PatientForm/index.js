@@ -1,7 +1,7 @@
 import React from "react";
 import CardContainer from "../../components/CardContainer";
 
-const PatientForm = ({ buttonText }) => {
+const PatientForm = () => {
   return (
     <div className="form-container">
       <CardContainer title="Patient Info" color="secondary_color">
@@ -47,7 +47,7 @@ const PatientForm = ({ buttonText }) => {
               type="submit"
               className="button button-right bg-secondary-color"
             >
-              {buttonText}
+              add
             </button>
           </div>
         </form>
