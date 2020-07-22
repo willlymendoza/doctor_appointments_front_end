@@ -1,0 +1,19 @@
+.bg-primary-color,
+.bg-secondary-color,
+.bg-warning-color,
+.bg-info-color {
+  color: $text-color;
+}
+
+.bg-primary-color {
+  background: $primary-color;
+}
+.bg-secondary-color {
+  background: $secondary-color;
+}
+.bg-warning-color {
+  background: $warning-color;
+}
+.bg-info-color {
+  background: $info-color;
+}
