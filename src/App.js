@@ -9,9 +9,11 @@ import Dashboard from "./pages/Dashboard";
 import Appointments from "./pages/Appointments";
 import Patients from "./pages/Patients";
 import AddPatient from "./pages/Patients/AddPatient";
+import ViewPatient from "./pages/Patients/ViewPatient";
 import Users from "./pages/Users";
 import Main from "./components/Main";
 import AddAppointment from "./pages/Appointments/AddAppointment";
+import ViewAppointment from "./pages/Appointments/ViewAppointment";
 
 function App() {
   return (
@@ -28,8 +30,14 @@ function App() {
               exact
               component={AddAppointment}
             ></Route>
+            <Route
+              path="/appointments/:id"
+              exact
+              component={ViewAppointment}
+            ></Route>
             <Route path="/patients" exact component={Patients}></Route>
             <Route path="/patients/add" exact component={AddPatient}></Route>
+            <Route path="/patients/:id" exact component={ViewPatient}></Route>
             <Route path="/users" exact component={Users}></Route>
           </Switch>
         </Main>
