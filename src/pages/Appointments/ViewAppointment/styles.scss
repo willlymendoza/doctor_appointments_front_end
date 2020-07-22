@@ -1,0 +1,26 @@
+@import "../../../assets/scss/config";
+
+.appointment-info-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 50px;
+
+  .appointment-form-container {
+    width: 100%;
+  }
+
+  .list-container {
+    div {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+
+      span {
+        margin-left: 15px;
+        a {
+          color: $secondary-color;
+        }
+      }
+    }
+  }
+}
