@@ -3,7 +3,7 @@ import CardContainer from "../../components/CardContainer";
 import SubmitButton from "../../components/SubmitButton";
 import "./styles.scss";
 
-const PatientForm = () => {
+const PatientForm = ({ buttonText }) => {
   return (
     <div className="patient-form-container">
       <CardContainer title="Patient Info" color="secondary_color">
@@ -44,7 +44,7 @@ const PatientForm = () => {
             <label>Sex</label>
             <input name="sex" />
           </div>
-          <SubmitButton text="add" colorClass="secondary" />
+          <SubmitButton text={buttonText} colorClass="secondary" />
         </form>
       </CardContainer>
     </div>
