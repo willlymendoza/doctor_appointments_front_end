@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import CardContainer from "../../components/CardContainer";
-import Pagination from "react-js-pagination";
+import CustomPagination from "../../components/CustomPagination";
 
 import "./styles.scss";
 
@@ -176,20 +176,12 @@ const PatientsListTable = () => {
           </span>
         </div>
       </CardContainer>
-      <Pagination
+      <CustomPagination
+        color="secondary"
         activePage={3}
         itemsCountPerPage={10}
-        totalItemsCount={50}
+        totalItemsCount={100}
         pageRangeDisplayed={5}
-        firstPageText={<i className="fa fa-angle-double-left" />}
-        lastPageText={<i className="fa fa-angle-double-right" />}
-        nextPageText={<i className="fa fa-chevron-right" />}
-        prevPageText={<i className="fa fa-chevron-left" />}
-        innerClass="pagination"
-        linkClassPrev="chevron"
-        linkClassNext="chevron"
-        linkClassFirst="chevron"
-        linkClassLast="chevron"
       />
     </Fragment>
   );
