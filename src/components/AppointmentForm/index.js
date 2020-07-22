@@ -1,6 +1,7 @@
 import React from "react";
 import CardContainer from "../../components/CardContainer";
 import Select from "react-select";
+import SubmitButton from "../../components/SubmitButton";
 import "./styles.scss";
 
 const options = [
@@ -69,9 +70,7 @@ const AppointmentForm = () => {
             <input type="time" name="email" />
           </div>
 
-          <div className="submitButton">
-            <button type="submit">Add</button>
-          </div>
+          <SubmitButton text="add" colorClass="warning" />
         </form>
       </CardContainer>
     </div>

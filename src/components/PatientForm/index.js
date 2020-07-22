@@ -1,5 +1,6 @@
 import React from "react";
 import CardContainer from "../../components/CardContainer";
+import SubmitButton from "../../components/SubmitButton";
 import "./styles.scss";
 
 const PatientForm = () => {
@@ -43,10 +44,7 @@ const PatientForm = () => {
             <label>Sex</label>
             <input name="sex" />
           </div>
-
-          <div className="submitButton">
-            <button type="submit">Add</button>
-          </div>
+          <SubmitButton text="add" colorClass="secondary" />
         </form>
       </CardContainer>
     </div>

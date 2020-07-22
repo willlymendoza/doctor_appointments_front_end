@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import CardContainer from "../../components/CardContainer";
 import DashBoardCard from "../../components/DashBoardCard";
 import PageTitle from "../../components/PageTitle";
+import SubmitButton from "../../components/SubmitButton";
 
 const Dashboard = () => {
   return (
@@ -61,6 +62,9 @@ const Dashboard = () => {
             <span>09:30</span>
             <span>Dr. Jhon Doe</span>
           </div>
+          <div className="table-grid table-content" style={{ marginTop: 50 }}>
+            <SubmitButton text="View Full List" colorClass="secondary" />
+          </div>
         </CardContainer>
         <CardContainer title="Recent Registered Patients" color="warning_color">
           <div className="table-grid table-header">
@@ -94,6 +98,9 @@ const Dashboard = () => {
             <span>Willian Wosbely Mendoza Hernandez</span>
             <span>2020-07-2020</span>
             <span>09:30</span>
+          </div>
+          <div className="table-grid table-content" style={{ marginTop: 50 }}>
+            <SubmitButton text="View Full List" colorClass="warning" />
           </div>
         </CardContainer>
       </div>
