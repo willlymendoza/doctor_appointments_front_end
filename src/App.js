@@ -1,5 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import generateStore from "./redux/store";
+
 import "./App.scss";
 
 import Header from "./components/Header";
@@ -17,36 +20,44 @@ import AddAppointment from "./pages/Appointments/AddAppointment";
 import ViewAppointment from "./pages/Appointments/ViewAppointment";
 
 function App() {
+  const store = generateStore();
+
   return (
-    <div className="container">
-      <Router>
-        <Header />
+    <Provider store={store}>
+      <div className="container">
+        <Router>
+          <Header />
 
-        <Main>
-          <Switch>
-            <Route path="/" exact component={Dashboard}></Route>
-            <Route path="/appointments" exact component={Appointments}></Route>
-            <Route
-              path="/appointments/add"
-              exact
-              component={AddAppointment}
-            ></Route>
-            <Route
-              path="/appointments/:id"
-              exact
-              component={ViewAppointment}
-            ></Route>
-            <Route path="/patients" exact component={Patients}></Route>
-            <Route path="/patients/add" exact component={AddPatient}></Route>
-            <Route path="/patients/:id" exact component={ViewPatient}></Route>
-            <Route path="/users" exact component={Users}></Route>
-            <Route path="/login" exact component={Login}></Route>
-          </Switch>
-        </Main>
+          <Main>
+            <Switch>
+              <Route path="/" exact component={Dashboard}></Route>
+              <Route
+                path="/appointments"
+                exact
+                component={Appointments}
+              ></Route>
+              <Route
+                path="/appointments/add"
+                exact
+                component={AddAppointment}
+              ></Route>
+              <Route
+                path="/appointments/:id"
+                exact
+                component={ViewAppointment}
+              ></Route>
+              <Route path="/patients" exact component={Patients}></Route>
+              <Route path="/patients/add" exact component={AddPatient}></Route>
+              <Route path="/patients/:id" exact component={ViewPatient}></Route>
+              <Route path="/users" exact component={Users}></Route>
+              <Route path="/login" exact component={Login}></Route>
+            </Switch>
+          </Main>
 
-        <Footer />
-      </Router>
-    </div>
+          <Footer />
+        </Router>
+      </div>
+    </Provider>
   );
 }
 
