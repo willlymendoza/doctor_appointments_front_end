@@ -14,9 +14,15 @@ $background-secondary: #ffffff;
   padding: 0;
 }
 
-body {
+body,
+textarea {
   font-family: "Roboto Slab", serif;
   font-weight: 300;
+  color: $primary-color;
+}
+
+textarea {
+  font-size: 1rem;
 }
 
 :export {
