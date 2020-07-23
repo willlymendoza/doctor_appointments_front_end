@@ -12,6 +12,7 @@ import AddPatient from "./pages/Patients/AddPatient";
 import ViewPatient from "./pages/Patients/ViewPatient";
 import Users from "./pages/Users";
 import Main from "./components/Main";
+import Login from "./pages/Login";
 import AddAppointment from "./pages/Appointments/AddAppointment";
 import ViewAppointment from "./pages/Appointments/ViewAppointment";
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="/patients/add" exact component={AddPatient}></Route>
             <Route path="/patients/:id" exact component={ViewPatient}></Route>
             <Route path="/users" exact component={Users}></Route>
+            <Route path="/login" exact component={Login}></Route>
           </Switch>
         </Main>
 
