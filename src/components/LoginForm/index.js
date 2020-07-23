@@ -5,7 +5,7 @@ import "./styles.scss";
 const LoginForm = () => {
   return (
     <Fragment>
-      <div className="form-container">
+      <div className="form-container login-container">
         <CardContainer title="Account Login" color="secondary_color">
           <form className="form">
             <div className="form-group full-width">
