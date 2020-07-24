@@ -1,9 +1,9 @@
 // constants
 
 const initialData = {
-  userInfo: JSON.parse(localStorage.getItem("userInfo")) || [],
-  userToken: localStorage.getItem("userToken") || "",
-  isAuthenticated: localStorage.getItem("isAuthenticated") || false,
+  userInfo: [],
+  userToken: "",
+  isAuthenticated: false,
 };
 
 // types
