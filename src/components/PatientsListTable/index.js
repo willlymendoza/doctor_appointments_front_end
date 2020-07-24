@@ -53,7 +53,7 @@ const PatientsListTable = () => {
           <label>Actions</label>
         </div>
         {patientsData.map((patient) => (
-          <div key={patient.id} className="table-grid table-content">
+          <div key={patient._id} className="table-grid table-content">
             <span>{patient.first_name}</span>
             <span>{patient.last_name}</span>
             <span>{patient.personal_document_id}</span>
