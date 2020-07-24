@@ -8,7 +8,7 @@ import "./styles.scss";
 import { NavLink } from "react-router-dom";
 
 const PatientsListTable = () => {
-  const [usersData, setUsersData] = useState([]);
+  const [patientsData, setPatientsData] = useState([]);
 
   const userToken = useSelector((store) => store.authData.userToken);
 
@@ -24,7 +24,7 @@ const PatientsListTable = () => {
           }
         );
         const result = getListPatients.data;
-        setUsersData(result);
+        setPatientsData(result);
       } catch (error) {
         if (error.response) console.log(error.response.data);
       }
@@ -52,12 +52,12 @@ const PatientsListTable = () => {
           <label>E-mail</label>
           <label>Actions</label>
         </div>
-        {usersData.map((user) => (
-          <div className="table-grid table-content">
-            <span>{user.first_name}</span>
-            <span>{user.last_name}</span>
-            <span>{user.personal_document_id}</span>
-            <span>{user.email}</span>
+        {patientsData.map((patient) => (
+          <div key={patient.id} className="table-grid table-content">
+            <span>{patient.first_name}</span>
+            <span>{patient.last_name}</span>
+            <span>{patient.personal_document_id}</span>
+            <span>{patient.email}</span>
             <span className="actions">
               <a href="/" className="edit_item">
                 <i className="fas fa-edit"></i>
