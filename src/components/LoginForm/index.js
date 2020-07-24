@@ -1,24 +1,61 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import CardContainer from "../CardContainer";
-import useAxios from "../../hooks/useAxios";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setLoginAction } from "../../redux/authDuck";
 
 import "./styles.scss";
 
-const LoginForm = () => {
-  const handleOnSubmit = async (e) => {
-    e.preventDefault();
-    /* getPatients(); */
-    console.log("submited");
+const LoginForm = (props) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  /* const getPatients = async () => {
-    const rest = await axios.get("http://localhost:5000/api/patients");
-    console.log(rest.data);
-  }; */
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    axiosPostData(formData);
+  };
 
-  const result = useAxios("http://localhost:5000/api/patients");
-  console.log(result);
+  const axiosPostData = async (data) => {
+    try {
+      const result = await axios.post("http://localhost:5000/api/auth", {
+        email: data.email,
+        password: data.password,
+      });
+
+      /* Redux */
+      dispatch(
+        setLoginAction({
+          user: result.data,
+          userToken: result.headers.authorization,
+        })
+      );
+
+      /* Local Storage */
+      localStorage.setItem("userToken", result.headers.authorization);
+      localStorage.setItem("isAuthenticated", true);
+      localStorage.setItem("userInfo", JSON.stringify(result.data));
+
+      history.push("/");
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+      }
+    }
+  };
 
   return (
     <Fragment>
@@ -27,11 +64,20 @@ const LoginForm = () => {
           <form className="form" onSubmit={handleOnSubmit}>
             <div className="form-group full-width">
               <label>E-mail</label>
-              <input type="text" name="email" />
+              <input
+                type="text"
+                name="email"
+                autoFocus
+                onChange={handleInputChange}
+              />
             </div>
             <div className="form-group full-width">
               <label>Password</label>
-              <input type="password" name="password" />
+              <input
+                type="password"
+                name="password"
+                onChange={handleInputChange}
+              />
             </div>
 
             <div className="form-group button-container">
