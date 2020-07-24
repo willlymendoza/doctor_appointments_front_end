@@ -25,7 +25,6 @@ const AppointmentsListTable = () => {
         );
         const result = getListAppointments.data;
         console.log(result);
-        setAppointmentsData(result);
       } catch (error) {
         if (error.response) console.log(error.response.data);
       }
