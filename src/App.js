@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import generateStore from "./redux/store";
+import { store, persistor } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 import ProtectedRoute from "./hoc/ProtectedRoute";
 
 import "./App.scss";
@@ -21,51 +22,51 @@ import AddAppointment from "./pages/Appointments/AddAppointment";
 import ViewAppointment from "./pages/Appointments/ViewAppointment";
 
 function App() {
-  const store = generateStore();
-
   return (
     <Provider store={store}>
-      <div className="container">
-        <Router>
-          <Header />
+      <PersistGate loading={null} persistor={persistor}>
+        <div className="container">
+          <Router>
+            <Header />
 
-          <Main>
-            <Switch>
-              <ProtectedRoute path="/" exact component={Dashboard} />
-              <ProtectedRoute
-                path="/appointments"
-                exact
-                component={Appointments}
-              />
-              <ProtectedRoute
-                path="/appointments/add"
-                exact
-                component={AddAppointment}
-              />
-              <ProtectedRoute
-                path="/appointments/:id"
-                exact
-                component={ViewAppointment}
-              />
-              <ProtectedRoute path="/patients" exact component={Patients} />
-              <ProtectedRoute
-                path="/patients/add"
-                exact
-                component={AddPatient}
-              />
-              <ProtectedRoute
-                path="/patients/:id"
-                exact
-                component={ViewPatient}
-              />
-              <ProtectedRoute path="/users" exact component={Users} />
-              <Route path="/login" exact component={Login}></Route>
-            </Switch>
-          </Main>
+            <Main>
+              <Switch>
+                <ProtectedRoute path="/" exact component={Dashboard} />
+                <ProtectedRoute
+                  path="/appointments"
+                  exact
+                  component={Appointments}
+                />
+                <ProtectedRoute
+                  path="/appointments/add"
+                  exact
+                  component={AddAppointment}
+                />
+                <ProtectedRoute
+                  path="/appointments/:id"
+                  exact
+                  component={ViewAppointment}
+                />
+                <ProtectedRoute path="/patients" exact component={Patients} />
+                <ProtectedRoute
+                  path="/patients/add"
+                  exact
+                  component={AddPatient}
+                />
+                <ProtectedRoute
+                  path="/patients/:id"
+                  exact
+                  component={ViewPatient}
+                />
+                <ProtectedRoute path="/users" exact component={Users} />
+                <Route path="/login" exact component={Login}></Route>
+              </Switch>
+            </Main>
 
-          <Footer />
-        </Router>
-      </div>
+            <Footer />
+          </Router>
+        </div>
+      </PersistGate>
     </Provider>
   );
 }
