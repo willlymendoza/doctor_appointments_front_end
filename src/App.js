@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import generateStore from "./redux/store";
+import ProtectedRoute from "./hoc/ProtectedRoute";
 
 import "./App.scss";
 
@@ -30,26 +31,34 @@ function App() {
 
           <Main>
             <Switch>
-              <Route path="/" exact component={Dashboard}></Route>
-              <Route
+              <ProtectedRoute path="/" exact component={Dashboard} />
+              <ProtectedRoute
                 path="/appointments"
                 exact
                 component={Appointments}
-              ></Route>
-              <Route
+              />
+              <ProtectedRoute
                 path="/appointments/add"
                 exact
                 component={AddAppointment}
-              ></Route>
-              <Route
+              />
+              <ProtectedRoute
                 path="/appointments/:id"
                 exact
                 component={ViewAppointment}
-              ></Route>
-              <Route path="/patients" exact component={Patients}></Route>
-              <Route path="/patients/add" exact component={AddPatient}></Route>
-              <Route path="/patients/:id" exact component={ViewPatient}></Route>
-              <Route path="/users" exact component={Users}></Route>
+              />
+              <ProtectedRoute path="/patients" exact component={Patients} />
+              <ProtectedRoute
+                path="/patients/add"
+                exact
+                component={AddPatient}
+              />
+              <ProtectedRoute
+                path="/patients/:id"
+                exact
+                component={ViewPatient}
+              />
+              <ProtectedRoute path="/users" exact component={Users} />
               <Route path="/login" exact component={Login}></Route>
             </Switch>
           </Main>
