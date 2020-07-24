@@ -14,7 +14,6 @@ const LoginForm = (props) => {
   });
 
   const dispatch = useDispatch();
-
   const history = useHistory();
 
   const handleInputChange = (e) => {
@@ -36,18 +35,12 @@ const LoginForm = (props) => {
         password: data.password,
       });
 
-      /* Redux */
       dispatch(
         setLoginAction({
           user: result.data,
           userToken: result.headers.authorization,
         })
       );
-
-      /* Local Storage */
-      localStorage.setItem("userToken", result.headers.authorization);
-      localStorage.setItem("isAuthenticated", true);
-      localStorage.setItem("userInfo", JSON.stringify(result.data));
 
       history.push("/");
     } catch (error) {

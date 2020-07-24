@@ -9,10 +9,6 @@ const NavBar = () => {
 
   const handleLogout = () => {
     dispatch(setLogoutAction());
-
-    localStorage.removeItem("userToken");
-    localStorage.removeItem("isAuthenticated");
-    localStorage.removeItem("userInfo");
   };
 
   return (
