@@ -1,8 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLogoutAction } from "../../redux/authDuck";
 import "./styles.scss";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(setLogoutAction());
+
+    localStorage.removeItem("userToken");
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("userInfo");
+  };
+
   return (
     <nav className="nav-bar">
       <NavLink activeClassName="active-link" to="/" exact>
@@ -16,6 +28,9 @@ const NavBar = () => {
       </NavLink>
       <NavLink activeClassName="active-link" to="/users">
         Users
+      </NavLink>
+      <NavLink to="/" onClick={handleLogout}>
+        Logout
       </NavLink>
     </nav>
   );
