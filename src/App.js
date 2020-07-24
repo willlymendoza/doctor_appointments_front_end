@@ -20,6 +20,7 @@ import Main from "./components/Main";
 import Login from "./pages/Login";
 import AddAppointment from "./pages/Appointments/AddAppointment";
 import ViewAppointment from "./pages/Appointments/ViewAppointment";
+import Error404 from "./components/Error404";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
                 />
                 <ProtectedRoute path="/users" exact component={Users} />
                 <Route path="/login" exact component={Login}></Route>
+                <Route path="*" component={Error404}></Route>
               </Switch>
             </Main>
 
