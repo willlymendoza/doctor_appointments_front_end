@@ -1,16 +1,99 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CardContainer from "../../components/CardContainer";
 import Select from "react-select";
-
-const options = [
-  { id: 1, first_name: "Jhon", last_name: "Doe" },
-  { id: 2, first_name: "Juan", last_name: "Doe" },
-  { id: 3, first_name: "Mic", last_name: "Doe" },
-];
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const AppointmentForm = () => {
+  const formData = {
+    patient_id: "",
+    doctor_id: "",
+    observations: "",
+    appointment_date: "",
+    hour: "",
+  };
+
+  const [appointmentInfo, setAppointmentInfo] = useState(formData);
+  const [doctorsList, setDoctorsList] = useState([]);
+  const [patientsList, setPatientsList] = useState([]);
+  const {
+    userToken,
+    userInfo: { _id: created_by_id },
+  } = useSelector((store) => store.authData);
+  const history = useHistory();
+
+  const handleInputChange = (e) => {
+    setAppointmentInfo({
+      ...appointmentInfo,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleSelectChange = (newValue, actionMeta) => {
-    console.log(newValue);
+    setAppointmentInfo({
+      ...appointmentInfo,
+      [actionMeta.name]: newValue._id,
+    });
+  };
+
+  const handleOnSubmit = (e) => {
+    axiosPostData();
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    const getDoctors = async () => {
+      try {
+        const result = await axios.get("http://localhost:5000/api/users", {
+          headers: {
+            Authorization: userToken,
+          },
+        });
+
+        setDoctorsList(result.data.filter((item) => item.is_doctor === true));
+      } catch (error) {
+        if (error.response) console.log(error.response.data);
+      }
+    };
+    getDoctors();
+  }, [userToken]);
+
+  useEffect(() => {
+    const getPatients = async () => {
+      try {
+        const result = await axios.get("http://localhost:5000/api/patients", {
+          headers: {
+            Authorization: userToken,
+          },
+        });
+
+        setPatientsList(result.data);
+      } catch (error) {
+        if (error.response) console.log(error.response.data);
+      }
+    };
+    getPatients();
+  }, [userToken]);
+
+  const axiosPostData = async () => {
+    try {
+      appointmentInfo.created_by_id = created_by_id;
+      await axios.post(
+        "http://localhost:5000/api/appointments",
+        appointmentInfo,
+        {
+          headers: {
+            Authorization: userToken,
+          },
+        }
+      );
+      history.push("/appointments");
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+      }
+    }
   };
 
   const customSelectStyles = {
@@ -26,46 +109,50 @@ const AppointmentForm = () => {
   return (
     <div className="form-container">
       <CardContainer title="Appointment Info" color="warning_color">
-        <form className="form">
+        <form className="form" onSubmit={handleOnSubmit}>
           <div className="form-group full-width">
             <label>Patient</label>
             <Select
+              name="patient_id"
               styles={customSelectStyles}
-              options={options}
+              options={patientsList}
               onChange={handleSelectChange}
               isClearable
               maxMenuHeight={150}
               getOptionLabel={(option) =>
                 `${option.first_name} ${option.last_name}`
               }
-              getOptionValue={(option) => option["id"]}
+              getOptionValue={(option) => option._id}
             />
           </div>
           <div className="form-group full-width">
             <label>Doctor</label>
             <Select
+              name="doctor_id"
               styles={customSelectStyles}
-              options={options}
+              options={doctorsList}
               onChange={handleSelectChange}
               isClearable
               maxMenuHeight={150}
-              getOptionLabel={(option) =>
-                `${option.first_name} ${option.last_name}`
-              }
-              getOptionValue={(option) => option["id"]}
+              getOptionLabel={(option) => `${option.name} ${option.last_name}`}
+              getOptionValue={(option) => option._id}
             />
           </div>
           <div className="form-group full-width">
             <label>Observations</label>
-            <textarea name="personal_document_id" />
+            <textarea name="observations" onChange={handleInputChange} />
           </div>
           <div className="form-group">
             <label>Date</label>
-            <input type="date" name="phone_number" />
+            <input
+              type="date"
+              name="appointment_date"
+              onChange={handleInputChange}
+            />
           </div>
           <div className="form-group">
             <label>Hour</label>
-            <input type="time" name="email" />
+            <input type="time" name="hour" onChange={handleInputChange} />
           </div>
 
           <div className="form-group button-container">
