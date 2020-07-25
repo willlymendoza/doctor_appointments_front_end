@@ -35,15 +35,11 @@ const PatientForm = (props) => {
 
   const axiosPostData = async () => {
     try {
-      const result = await axios.post(
-        "http://localhost:5000/api/patients",
-        patientInfo,
-        {
-          headers: {
-            Authorization: userToken,
-          },
-        }
-      );
+      await axios.post("http://localhost:5000/api/patients", patientInfo, {
+        headers: {
+          Authorization: userToken,
+        },
+      });
       history.push("/patients");
     } catch (error) {
       if (error.response) {
