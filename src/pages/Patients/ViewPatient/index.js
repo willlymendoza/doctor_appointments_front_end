@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import PageTitle from "../../../components/PageTitle";
-import PatientForm from "../../../components/PatientForm";
+import PatientViewForm from "../../../components/PatientViewForm";
 
 import "./styles.scss";
 import CardContainer from "../../../components/CardContainer";
@@ -13,7 +13,7 @@ const ViewPatient = () => {
     <Fragment>
       <PageTitle title={`PATIENT ${id}`} />
       <div className="patient-info-container">
-        <PatientForm buttonText="edit" />
+        <PatientViewForm />
         <CardContainer title="Appointments" color="warning_color">
           <div className="list-container">
             <div>
