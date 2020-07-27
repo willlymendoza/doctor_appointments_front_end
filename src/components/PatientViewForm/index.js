@@ -7,6 +7,7 @@ import { useHistory, useParams } from "react-router-dom";
 const PatientViewForm = () => {
   const { id } = useParams();
   const [patientInfo, setPatientInfo] = useState([]);
+  const [disabledInput, setDisabledInput] = useState(true);
   const userToken = useSelector((store) => store.authData.userToken);
   const history = useHistory();
 
@@ -17,6 +18,11 @@ const PatientViewForm = () => {
     });
   };
 
+  const handleEditClick = (e) => {
+    e.preventDefault();
+    setDisabledInput(false);
+  };
+
   const handleOnSubmit = (e) => {
     axiosPostData();
     e.preventDefault();
@@ -24,12 +30,13 @@ const PatientViewForm = () => {
 
   const axiosPostData = async () => {
     try {
-      await axios.post("http://localhost:5000/api/patients", patientInfo, {
+      delete patientInfo._id;
+      await axios.put(`http://localhost:5000/api/patients/${id}`, patientInfo, {
         headers: {
           Authorization: userToken,
         },
       });
-      history.push("/patients");
+      setDisabledInput(true);
     } catch (error) {
       if (error.response) {
         console.log(error.response.data);
@@ -65,6 +72,7 @@ const PatientViewForm = () => {
             <label>First Name</label>
             <input
               name="first_name"
+              disabled={disabledInput}
               defaultValue={patientInfo.first_name}
               onChange={handleInputChange}
             />
@@ -73,6 +81,7 @@ const PatientViewForm = () => {
             <label>Last Name</label>
             <input
               name="last_name"
+              disabled={disabledInput}
               defaultValue={patientInfo.last_name}
               onChange={handleInputChange}
             />
@@ -81,6 +90,7 @@ const PatientViewForm = () => {
             <label>Personal Document ID</label>
             <input
               name="personal_document_id"
+              disabled={disabledInput}
               defaultValue={patientInfo.personal_document_id}
               onChange={handleInputChange}
             />
@@ -89,6 +99,7 @@ const PatientViewForm = () => {
             <label>Phone Number</label>
             <input
               name="phone_number"
+              disabled={disabledInput}
               defaultValue={patientInfo.phone_number}
               onChange={handleInputChange}
             />
@@ -97,6 +108,7 @@ const PatientViewForm = () => {
             <label>E-mail</label>
             <input
               name="email"
+              disabled={disabledInput}
               defaultValue={patientInfo.email}
               onChange={handleInputChange}
             />
@@ -105,6 +117,7 @@ const PatientViewForm = () => {
             <label>City</label>
             <input
               name="city"
+              disabled={disabledInput}
               defaultValue={patientInfo.city}
               onChange={handleInputChange}
             />
@@ -113,6 +126,7 @@ const PatientViewForm = () => {
             <label>Address</label>
             <input
               name="address"
+              disabled={disabledInput}
               defaultValue={patientInfo.address}
               onChange={handleInputChange}
             />
@@ -121,6 +135,7 @@ const PatientViewForm = () => {
             <label>Age</label>
             <input
               name="age"
+              disabled={disabledInput}
               defaultValue={patientInfo.age}
               onChange={handleInputChange}
             />
@@ -129,17 +144,28 @@ const PatientViewForm = () => {
             <label>Sex</label>
             <input
               name="sex"
+              disabled={disabledInput}
               defaultValue={patientInfo.sex}
               onChange={handleInputChange}
             />
           </div>
           <div className="form-group button-container">
-            <button
-              type="submit"
-              className="button button-right bg-secondary-color"
-            >
-              edit
-            </button>
+            {!disabledInput ? (
+              <button
+                type="submit"
+                className="button button-right bg-secondary-color"
+              >
+                save changes
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="button button-right bg-secondary-color"
+                onClick={handleEditClick}
+              >
+                edit
+              </button>
+            )}
           </div>
         </form>
       </CardContainer>
