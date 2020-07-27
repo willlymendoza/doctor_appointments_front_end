@@ -17,10 +17,7 @@ const AppointmentForm = () => {
   const [appointmentInfo, setAppointmentInfo] = useState(formData);
   const [doctorsList, setDoctorsList] = useState([]);
   const [patientsList, setPatientsList] = useState([]);
-  const {
-    userToken,
-    userInfo: { _id: created_by_id },
-  } = useSelector((store) => store.authData);
+  const { userToken } = useSelector((store) => store.authData);
   const history = useHistory();
 
   const handleInputChange = (e) => {
@@ -78,7 +75,6 @@ const AppointmentForm = () => {
 
   const axiosPostData = async () => {
     try {
-      appointmentInfo.created_by_id = created_by_id;
       await axios.post(
         "http://localhost:5000/api/appointments",
         appointmentInfo,
