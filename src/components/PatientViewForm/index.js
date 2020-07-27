@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CardContainer from "../../components/CardContainer";
 import axios from "axios";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const PatientViewForm = () => {
   const { id } = useParams();
   const [patientInfo, setPatientInfo] = useState([]);
   const [disabledInput, setDisabledInput] = useState(true);
   const userToken = useSelector((store) => store.authData.userToken);
-  const history = useHistory();
 
   const handleInputChange = (e) => {
     setPatientInfo({
