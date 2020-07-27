@@ -1,11 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import CardContainer from "../../components/CardContainer";
 import CustomPagination from "../../components/CustomPagination";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
 import "./styles.scss";
-import { NavLink } from "react-router-dom";
 
 const PatientsListTable = () => {
   const [patientsData, setPatientsData] = useState([]);
@@ -59,12 +59,9 @@ const PatientsListTable = () => {
             <span>{patient.personal_document_id}</span>
             <span>{patient.email}</span>
             <span className="actions">
-              <a href="/" className="edit_item">
-                <i className="fas fa-edit"></i>
-              </a>
-              <a href="/" className="view_item">
+              <Link to={`patients/${patient._id}`} className="view_item">
                 <i className="fas fa-eye"></i>
-              </a>
+              </Link>
             </span>
           </div>
         ))}
