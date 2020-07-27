@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import PageTitle from "../../../components/PageTitle";
 import CardContainer from "../../../components/CardContainer";
-import AppointmentForm from "../../../components/AppointmentForm";
+import AppointmentViewForm from "../../../components/AppointmentViewForm";
 
 import "./styles.scss";
 
@@ -13,7 +13,7 @@ const ViewAppointment = () => {
     <Fragment>
       <PageTitle title={`2020-07-17 15:30 -- ${id}`} />
       <div className="appointment-info-container">
-        <AppointmentForm />
+        <AppointmentViewForm />
         <CardContainer title="Patient Info" color="secondary_color">
           <div className="list-container">
             <div>
