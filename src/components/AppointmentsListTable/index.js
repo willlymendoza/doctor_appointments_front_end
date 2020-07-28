@@ -4,7 +4,7 @@ import CustomPagination from "../../components/CustomPagination";
 import axios from "axios";
 
 import "./styles.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const AppointmentsListTable = () => {
@@ -64,12 +64,12 @@ const AppointmentsListTable = () => {
               {appointment.doctor.name} {appointment.doctor.last_name}
             </span>
             <span className="actions">
-              <a href="/" className="edit_item">
-                <i className="fas fa-edit"></i>
-              </a>
-              <a href="/" className="view_item">
+              <Link
+                to={`/appointments/${appointment._id}`}
+                className="view_item"
+              >
                 <i className="fas fa-eye"></i>
-              </a>
+              </Link>
             </span>
           </div>
         ))}
