@@ -29,8 +29,8 @@ const PatientViewForm = () => {
 
   const axiosPostData = async () => {
     try {
-      delete patientInfo._id;
-      await axios.put(`http://localhost:5000/api/patients/${id}`, patientInfo, {
+      const { _id, ...postData } = patientInfo;
+      await axios.put(`http://localhost:5000/api/patients/${id}`, postData, {
         headers: {
           Authorization: userToken,
         },
