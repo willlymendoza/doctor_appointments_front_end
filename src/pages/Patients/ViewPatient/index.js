@@ -1,12 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import PageTitle from "../../../components/PageTitle";
 import PatientViewForm from "../../../components/PatientViewForm";
 
 import "./styles.scss";
-import CardContainer from "../../../components/CardContainer";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import PatientAppointmentsList from "../PatientAppointmentsList";
 
 const ViewPatient = () => {
   const { id } = useParams();
@@ -90,7 +90,7 @@ const ViewPatient = () => {
 
   return (
     <Fragment>
-      <PageTitle title={`PATIENT ${id}`} />
+      <PageTitle title={patientInfo.first_name + " " + patientInfo.last_name} />
       <div className="patient-info-container">
         <PatientViewForm
           patientInfo={patientInfo}
@@ -100,22 +100,7 @@ const ViewPatient = () => {
           handleEditClick={handleEditClick}
         />
 
-        {/* PATIENT INFO CONTAINER */}
-        <CardContainer title="Appointments" color="warning_color">
-          <div className="list-container">
-            {appointmentsInfo.map((item) => (
-              <div key={item._id}>
-                <span>{item.appointment_date}</span>
-                <span>{item.hour}</span>
-                <span>
-                  <Link to={`/appointments/${item._id}`}>
-                    <i className="fas fa-eye"></i>
-                  </Link>
-                </span>
-              </div>
-            ))}
-          </div>
-        </CardContainer>
+        <PatientAppointmentsList appointmentsInfo={appointmentsInfo} />
       </div>
     </Fragment>
   );
