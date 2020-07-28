@@ -1,0 +1,20 @@
+@import "../../../assets/scss/config";
+
+.patient-info {
+  div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+
+    label {
+      font-weight: 400;
+    }
+
+    span {
+      margin-top: 5px;
+      a {
+        color: $secondary-color;
+      }
+    }
+  }
+}
