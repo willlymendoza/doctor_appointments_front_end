@@ -4,6 +4,7 @@ import DashBoardCard from "../../components/DashBoardCard";
 import PageTitle from "../../components/PageTitle";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const [recentAppointments, setRecentAppointments] = useState([]);
@@ -156,9 +157,11 @@ const Dashboard = () => {
             </div>
           ))}
           <div className="table-grid table-content" style={{ marginTop: 50 }}>
-            <button className="button button-right bg-secondary-color">
-              view full list
-            </button>
+            <Link to="/appointments">
+              <button className="button button-right bg-secondary-color">
+                view full list
+              </button>
+            </Link>
           </div>
         </CardContainer>
         <CardContainer title="Recent Registered Patients" color="warning_color">
@@ -178,9 +181,11 @@ const Dashboard = () => {
             </div>
           ))}
           <div className="table-grid table-content" style={{ marginTop: 50 }}>
-            <button className="button button-right bg-warning-color">
-              view full list
-            </button>
+            <Link to="/patients">
+              <button className="button button-right bg-warning-color">
+                view full list
+              </button>
+            </Link>
           </div>
         </CardContainer>
       </div>
