@@ -1,0 +1,16 @@
+@import "../../../assets/scss/config";
+
+.list-container {
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 50px;
+
+    span {
+      a {
+        color: $secondary-color;
+      }
+    }
+  }
+}
