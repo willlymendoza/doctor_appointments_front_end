@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect, useState } from "react";
 import CardContainer from "../../components/CardContainer";
 import CustomPagination from "../../components/CustomPagination";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import axios from "axios";
 
 import "./styles.scss";
+import Table from "../Table";
 
 const PatientsListTable = () => {
   const [patientsData, setPatientsData] = useState([]);
@@ -45,26 +46,16 @@ const PatientsListTable = () => {
         </button>
       </NavLink>
       <CardContainer title="List Of Patients" color="secondary_color">
-        <div className="table-grid table-header">
-          <label>First Name</label>
-          <label>Last Name</label>
-          <label>Personal ID</label>
-          <label>E-mail</label>
-          <label>Actions</label>
-        </div>
-        {patientsData.map((patient) => (
-          <div key={patient._id} className="table-grid table-content">
-            <span>{patient.first_name}</span>
-            <span>{patient.last_name}</span>
-            <span>{patient.personal_document_id}</span>
-            <span>{patient.email}</span>
-            <span className="actions">
-              <Link to={`patients/${patient._id}`} className="view_item">
-                <i className="fas fa-eye"></i>
-              </Link>
-            </span>
-          </div>
-        ))}
+        <Table
+          labels={[
+            { label: "First Name", value: "first_name" },
+            { label: "Last Name", value: "last_name" },
+            { label: "Personal ID", value: "personal_document_id" },
+            { label: "E-mail", value: "email" },
+          ]}
+          data={patientsData}
+          actions={{ link: "/patients" }}
+        />
       </CardContainer>
       <CustomPagination
         color="secondary"
