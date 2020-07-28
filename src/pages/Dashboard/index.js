@@ -5,6 +5,7 @@ import PageTitle from "../../components/PageTitle";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Table from "../../components/Table";
 
 const Dashboard = () => {
   const [recentAppointments, setRecentAppointments] = useState([]);
@@ -117,7 +118,7 @@ const Dashboard = () => {
       <div className="dashboard-cards">
         <DashBoardCard
           title="Patients"
-          color="warning_color"
+          color="secondary_color"
           quantity={totalPatients}
         />
         <DashBoardCard
@@ -127,7 +128,7 @@ const Dashboard = () => {
         />
         <DashBoardCard
           title="Today's Appointments"
-          color="secondary_color"
+          color="warning_color"
           quantity={todayAppointments}
         />
       </div>
@@ -135,56 +136,55 @@ const Dashboard = () => {
       <div className="dashboard-tables">
         <CardContainer
           title="Recent Registered Appointments"
-          color="secondary_color"
+          color="warning_color"
         >
-          <div className="table-grid table-header">
-            <label>Date</label>
-            <label>Hour</label>
-            <label>Patient</label>
-            <label>Doctor</label>
-          </div>
-          {recentAppointments.map((appointment) => (
-            <div key={appointment._id} className="table-grid table-content">
-              <span>{appointment.appointment_date}</span>
-              <span>{appointment.hour}</span>
-              <span>
-                <label>Name: </label>
-                {appointment.patient.first_name} {appointment.patient.last_name}
-              </span>
-              <span>
-                {appointment.doctor.name} {appointment.doctor.last_name}
-              </span>
-            </div>
-          ))}
+          <Table
+            labels={[
+              { label: "Date", value: "appointment_date" },
+              { label: "Hour", value: ["hour"] },
+              {
+                label: "Patient",
+                value: "patient",
+                child: ["first_name", "last_name"],
+                type: "object",
+              },
+              {
+                label: "Doctor",
+                value: "doctor",
+                child: ["name", "last_name"],
+                type: "object",
+              },
+            ]}
+            data={recentAppointments}
+          />
           <div className="table-grid table-content" style={{ marginTop: 50 }}>
-            <Link to="/appointments">
-              <button className="button button-right bg-secondary-color">
-                view full list
-              </button>
+            <Link
+              className="button button-right bg-warning-color"
+              to="/appointments"
+            >
+              view full list
             </Link>
           </div>
         </CardContainer>
-        <CardContainer title="Recent Registered Patients" color="warning_color">
-          <div className="table-grid table-header">
-            <label>Patient</label>
-            <label>E-mail</label>
-            <label>Registered Date</label>
-          </div>
-          {recentPatients.map((patient) => (
-            <div key={patient._id} className="table-grid table-content">
-              <span>
-                <label>Name: </label>
-                {patient.first_name} {patient.last_name}
-              </span>
-              <span>{patient.email}</span>
-              <span>{patient.created_at}</span>
-            </div>
-          ))}
+
+        <CardContainer
+          title="Recent Registered Patients"
+          color="secondary_color"
+        >
+          <Table
+            labels={[
+              { label: "Patient", value: ["first_name", "last_name"] },
+              { label: "E-mail", value: "email" },
+              { label: "Registered Date", value: "created_at" },
+            ]}
+            data={recentPatients}
+          />
           <div className="table-grid table-content" style={{ marginTop: 50 }}>
-            <Link to="/patients">
-              <button className="button button-right bg-warning-color">
-                view full list
-              </button>
+            <Link
+              className="button button-right bg-secondary-color"
+              to="/patients"
+            >
+              view full list
             </Link>
           </div>
         </CardContainer>
