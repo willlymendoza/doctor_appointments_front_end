@@ -4,8 +4,9 @@ import CustomPagination from "../../components/CustomPagination";
 import axios from "axios";
 
 import "./styles.scss";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Table from "../Table";
 
 const AppointmentsListTable = () => {
   const [appointmentsData, setAppointmentsData] = useState([]);
@@ -45,34 +46,26 @@ const AppointmentsListTable = () => {
         </button>
       </NavLink>
       <CardContainer title="List Of Appointments" color="warning_color">
-        <div className="table-grid table-header">
-          <label>Date</label>
-          <label>Hour</label>
-          <label>Patient</label>
-          <label>Doctor</label>
-          <label>Actions</label>
-        </div>
-        {appointmentsData.map((appointment) => (
-          <div key={appointment._id} className="table-grid table-content">
-            <span>{appointment.appointment_date}</span>
-            <span>{appointment.hour}</span>
-            <span>
-              <label>Name: </label>
-              {appointment.patient.first_name} {appointment.patient.last_name}
-            </span>
-            <span>
-              {appointment.doctor.name} {appointment.doctor.last_name}
-            </span>
-            <span className="actions">
-              <Link
-                to={`/appointments/${appointment._id}`}
-                className="view_item"
-              >
-                <i className="fas fa-eye"></i>
-              </Link>
-            </span>
-          </div>
-        ))}
+        <Table
+          labels={[
+            { label: "Date", value: "appointment_date" },
+            { label: "Hour", value: "hour" },
+            {
+              label: "Patient",
+              value: "patient",
+              child: ["first_name", "last_name"],
+              type: "object",
+            },
+            {
+              label: "Doctor",
+              value: "doctor",
+              child: ["name", "last_name"],
+              type: "object",
+            },
+          ]}
+          data={appointmentsData}
+          actions={{ link: "/appointments" }}
+        />
       </CardContainer>
       <CustomPagination
         color="warning"
