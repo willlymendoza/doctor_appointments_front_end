@@ -4,7 +4,7 @@ import CardContainer from "../../components/CardContainer";
 import Select from "react-select";
 import axios from "axios";
 import moment from "moment";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const AppointmentViewForm = () => {
   const { id } = useParams();
@@ -12,8 +12,8 @@ const AppointmentViewForm = () => {
   const [patientInfo, setPatientInfo] = useState([]);
   const [patientsList, setPatientsList] = useState([]);
   const [doctorsList, setDoctorsList] = useState([]);
+  const [disabledInput, setDisabledInput] = useState(true);
   const userToken = useSelector((store) => store.authData.userToken);
-  const history = useHistory();
 
   const handleInputChange = (e) => {
     setAppointmentInfo({
@@ -29,9 +29,34 @@ const AppointmentViewForm = () => {
     });
   };
 
-  const handleOnSubmit = (e) => {
-    // axiosPostData();
+  const handleEditClick = (e) => {
     e.preventDefault();
+    setDisabledInput(false);
+  };
+
+  const handleOnSubmit = (e) => {
+    axiosPostData();
+    e.preventDefault();
+  };
+
+  const axiosPostData = async () => {
+    try {
+      const { _id, id, ...postData } = appointmentInfo;
+      await axios.put(
+        `http://localhost:5000/api/appointments/${id}`,
+        postData,
+        {
+          headers: {
+            Authorization: userToken,
+          },
+        }
+      );
+      setDisabledInput(true);
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data);
+      }
+    }
   };
 
   /* getting list of doctors */
@@ -116,6 +141,7 @@ const AppointmentViewForm = () => {
               <label>Patient</label>
               <Select
                 name="patient_id"
+                isDisabled={disabledInput}
                 value={patientsList.filter(
                   (item) => item._id === appointmentInfo.patient_id
                 )}
@@ -134,6 +160,7 @@ const AppointmentViewForm = () => {
               <label>Doctor</label>
               <Select
                 name="doctor_id"
+                isDisabled={disabledInput}
                 value={doctorsList.filter(
                   (item) => item._id === appointmentInfo.doctor_id
                 )}
@@ -152,6 +179,7 @@ const AppointmentViewForm = () => {
               <label>Observations</label>
               <textarea
                 name="observations"
+                disabled={disabledInput}
                 defaultValue={appointmentInfo.observations}
                 onChange={handleInputChange}
               />
@@ -161,6 +189,7 @@ const AppointmentViewForm = () => {
               <input
                 type="date"
                 name="appointment_date"
+                disabled={disabledInput}
                 defaultValue={moment(appointmentInfo.appointment_date).format(
                   "yyyy-MM-DD"
                 )}
@@ -172,15 +201,29 @@ const AppointmentViewForm = () => {
               <input
                 type="time"
                 name="hour"
+                disabled={disabledInput}
                 defaultValue={appointmentInfo.hour}
                 onChange={handleInputChange}
               />
             </div>
 
             <div className="form-group button-container">
-              <button className="button button-right bg-warning-color">
-                add
-              </button>
+              {!disabledInput ? (
+                <button
+                  type="submit"
+                  className="button button-right bg-warning-color"
+                >
+                  save changes
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="button button-right bg-warning-color"
+                  onClick={handleEditClick}
+                >
+                  edit
+                </button>
+              )}
             </div>
           </form>
         ) : (
