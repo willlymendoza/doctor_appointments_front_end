@@ -1,8 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import PageTitle from "../../../components/PageTitle";
-import CardContainer from "../../../components/CardContainer";
 import AppointmentViewForm from "../../../components/AppointmentViewForm";
+import AppointmentPatientInfo from "../AppointmentPatientInfo";
 import axios from "axios";
 
 import "./styles.scss";
@@ -143,44 +143,8 @@ const ViewAppointment = () => {
           handleInputChange={handleInputChange}
           handleEditClick={handleEditClick}
         />
-        <CardContainer title="Patient Info" color="secondary_color">
-          <div className="list-container">
-            <div>
-              <label>Name: </label>
-              <span>
-                {patientInfo.first_name} {patientInfo.last_name}
-              </span>
-            </div>
-            <div>
-              <label>Personal Document ID: </label>
-              <span>{patientInfo.personal_document_id}</span>
-            </div>
-            <div>
-              <label>E-mail: </label>
-              <span>{patientInfo.email}</span>
-            </div>
-            <div>
-              <label>Phone Number: </label>
-              <span>{patientInfo.phone_number}</span>
-            </div>
-            <div>
-              <label>City: </label>
-              <span>{patientInfo.city}</span>
-            </div>
-            <div>
-              <label>Address: </label>
-              <span>{patientInfo.address}</span>
-            </div>
-            <div>
-              <label>Age: </label>
-              <span>{patientInfo.age}</span>
-            </div>
-            <div>
-              <label>Sex: </label>
-              <span>{patientInfo.sex}</span>
-            </div>
-          </div>
-        </CardContainer>
+
+        <AppointmentPatientInfo patientInfo={patientInfo} />
       </div>
     </Fragment>
   );
