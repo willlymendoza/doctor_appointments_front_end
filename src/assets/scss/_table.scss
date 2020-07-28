@@ -19,6 +19,7 @@
     span {
       border: 1px solid $background-primary;
       padding: 10px;
+      overflow-wrap: break-word;
     }
   }
 }
