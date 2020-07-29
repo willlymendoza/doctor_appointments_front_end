@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from "react";
-import CardContainer from "../CardContainer";
+import CardContainer from "../../../components/CardContainer";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setLoginAction } from "../../redux/authDuck";
+import { setLoginAction } from "../../../redux/authDuck";
 
 import "./styles.scss";
 
