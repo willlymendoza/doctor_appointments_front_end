@@ -3,23 +3,28 @@ import CardContainer from "../../components/CardContainer";
 
 const PatientViewForm = ({
   patientInfo,
-  handleOnSubmit,
+  onSubmitForm,
   disabledInput,
-  handleInputChange,
   handleEditClick,
+  register,
+  handleSubmit,
+  errors,
 }) => {
   return (
     <div className="form-container">
       <CardContainer title="Patient Info" color="secondary_color">
-        <form className="form" onSubmit={handleOnSubmit}>
+        <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
           <div className="form-group">
             <label>First Name</label>
             <input
               name="first_name"
               disabled={disabledInput}
               defaultValue={patientInfo.first_name}
-              onChange={handleInputChange}
+              ref={register}
             />
+            <span className="form-error-message">
+              {errors?.first_name?.message}
+            </span>
           </div>
           <div className="form-group">
             <label>Last Name</label>
@@ -27,8 +32,11 @@ const PatientViewForm = ({
               name="last_name"
               disabled={disabledInput}
               defaultValue={patientInfo.last_name}
-              onChange={handleInputChange}
+              ref={register}
             />
+            <span className="form-error-message">
+              {errors?.last_name?.message}
+            </span>
           </div>
           <div className="form-group">
             <label>Personal Document ID</label>
@@ -36,8 +44,11 @@ const PatientViewForm = ({
               name="personal_document_id"
               disabled={disabledInput}
               defaultValue={patientInfo.personal_document_id}
-              onChange={handleInputChange}
+              ref={register}
             />
+            <span className="form-error-message">
+              {errors?.personal_document_id?.message}
+            </span>
           </div>
           <div className="form-group">
             <label>Phone Number</label>
@@ -45,8 +56,11 @@ const PatientViewForm = ({
               name="phone_number"
               disabled={disabledInput}
               defaultValue={patientInfo.phone_number}
-              onChange={handleInputChange}
+              ref={register}
             />
+            <span className="form-error-message">
+              {errors?.phone_number?.message}
+            </span>
           </div>
           <div className="form-group">
             <label>E-mail</label>
@@ -54,8 +68,9 @@ const PatientViewForm = ({
               name="email"
               disabled={disabledInput}
               defaultValue={patientInfo.email}
-              onChange={handleInputChange}
+              ref={register}
             />
+            <span className="form-error-message">{errors?.email?.message}</span>
           </div>
           <div className="form-group">
             <label>City</label>
@@ -63,8 +78,9 @@ const PatientViewForm = ({
               name="city"
               disabled={disabledInput}
               defaultValue={patientInfo.city}
-              onChange={handleInputChange}
+              ref={register}
             />
+            <span className="form-error-message">{errors?.city?.message}</span>
           </div>
           <div className="form-group">
             <label>Address</label>
@@ -72,8 +88,11 @@ const PatientViewForm = ({
               name="address"
               disabled={disabledInput}
               defaultValue={patientInfo.address}
-              onChange={handleInputChange}
+              ref={register}
             />
+            <span className="form-error-message">
+              {errors?.address?.message}
+            </span>
           </div>
           <div className="form-group">
             <label>Age</label>
@@ -81,8 +100,9 @@ const PatientViewForm = ({
               name="age"
               disabled={disabledInput}
               defaultValue={patientInfo.age}
-              onChange={handleInputChange}
+              ref={register}
             />
+            <span className="form-error-message">{errors?.age?.message}</span>
           </div>
           <div className="form-group">
             <label>Sex</label>
@@ -90,8 +110,9 @@ const PatientViewForm = ({
               name="sex"
               disabled={disabledInput}
               defaultValue={patientInfo.sex}
-              onChange={handleInputChange}
+              ref={register}
             />
+            <span className="form-error-message">{errors?.sex?.message}</span>
           </div>
           <div className="form-group button-container">
             {!disabledInput ? (
