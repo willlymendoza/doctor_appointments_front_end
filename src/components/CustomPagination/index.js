@@ -9,6 +9,7 @@ const CustomPagination = ({
   totalItemsCount,
   pageRangeDisplayed,
   color,
+  handlePageChange,
 }) => {
   return (
     <Pagination
@@ -16,6 +17,7 @@ const CustomPagination = ({
       itemsCountPerPage={itemsCountPerPage}
       totalItemsCount={totalItemsCount}
       pageRangeDisplayed={pageRangeDisplayed}
+      onChange={handlePageChange}
       firstPageText={<i className="fa fa-angle-double-left" />}
       lastPageText={<i className="fa fa-angle-double-right" />}
       nextPageText={<i className="fa fa-chevron-right" />}
