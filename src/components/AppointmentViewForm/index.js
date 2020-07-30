@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CardContainer from "../../components/CardContainer";
 import Select from "react-select";
 import moment from "moment";
@@ -7,11 +7,16 @@ const AppointmentViewForm = ({
   patientsList,
   doctorsList,
   appointmentInfo,
-  handleOnSubmit,
+  onSubmitForm,
   disabledInput,
   handleSelectChange,
-  handleInputChange,
   handleEditClick,
+  handleSubmit,
+  register,
+  errors,
+  control,
+  Controller,
+  setValue,
 }) => {
   const customSelectStyles = {
     valueContainer: () => ({
@@ -23,48 +28,71 @@ const AppointmentViewForm = ({
     }),
   };
 
+  useEffect(() => {
+    setValue("patient_id", appointmentInfo.patient_id);
+    setValue("doctor_id", appointmentInfo.doctor_id);
+  }, [appointmentInfo.doctor_id, appointmentInfo.patient_id, setValue]);
+
   return (
     <div className="form-container">
       <CardContainer title="Appointment Info" color="warning_color">
         {appointmentInfo ? (
-          <form className="form" onSubmit={handleOnSubmit}>
+          <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
             <div className="form-group full-width">
               <label>Patient</label>
-              <Select
+              <Controller
+                control={control}
                 name="patient_id"
-                isDisabled={disabledInput}
-                value={patientsList.filter(
-                  (item) => item._id === appointmentInfo.patient_id
+                render={() => (
+                  <Select
+                    name="patient_id"
+                    isDisabled={disabledInput}
+                    defaultValue={patientsList.filter(
+                      (item) => item._id === appointmentInfo.patient_id
+                    )}
+                    styles={customSelectStyles}
+                    options={patientsList}
+                    onChange={handleSelectChange}
+                    isClearable
+                    maxMenuHeight={150}
+                    getOptionLabel={(option) =>
+                      `${option.first_name} ${option.last_name}`
+                    }
+                    getOptionValue={(option) => option._id}
+                  />
                 )}
-                styles={customSelectStyles}
-                options={patientsList}
-                onChange={handleSelectChange}
-                isClearable
-                maxMenuHeight={150}
-                getOptionLabel={(option) =>
-                  `${option.first_name} ${option.last_name}`
-                }
-                getOptionValue={(option) => option._id}
               />
+              <span className="form-error-message">
+                {errors?.patient_id?.message}
+              </span>
             </div>
             <div className="form-group full-width">
               <label>Doctor</label>
-              <Select
+              <Controller
                 name="doctor_id"
-                isDisabled={disabledInput}
-                value={doctorsList.filter(
-                  (item) => item._id === appointmentInfo.doctor_id
+                control={control}
+                render={() => (
+                  <Select
+                    name="doctor_id"
+                    isDisabled={disabledInput}
+                    defaultValue={doctorsList.filter(
+                      (item) => item._id === appointmentInfo.doctor_id
+                    )}
+                    styles={customSelectStyles}
+                    options={doctorsList}
+                    onChange={handleSelectChange}
+                    isClearable
+                    maxMenuHeight={150}
+                    getOptionLabel={(option) =>
+                      `${option.name} ${option.last_name}`
+                    }
+                    getOptionValue={(option) => option._id}
+                  />
                 )}
-                styles={customSelectStyles}
-                options={doctorsList}
-                onChange={handleSelectChange}
-                isClearable
-                maxMenuHeight={150}
-                getOptionLabel={(option) =>
-                  `${option.name} ${option.last_name}`
-                }
-                getOptionValue={(option) => option._id}
               />
+              <span className="form-error-message">
+                {errors?.doctor_id?.message}
+              </span>
             </div>
             <div className="form-group full-width">
               <label>Observations</label>
@@ -72,8 +100,11 @@ const AppointmentViewForm = ({
                 name="observations"
                 disabled={disabledInput}
                 defaultValue={appointmentInfo.observations}
-                onChange={handleInputChange}
+                ref={register}
               />
+              <span className="form-error-message">
+                {errors?.observations?.message}
+              </span>
             </div>
             <div className="form-group">
               <label>Date</label>
@@ -84,8 +115,11 @@ const AppointmentViewForm = ({
                 defaultValue={moment(appointmentInfo.appointment_date).format(
                   "yyyy-MM-DD"
                 )}
-                onChange={handleInputChange}
+                ref={register}
               />
+              <span className="form-error-message">
+                {errors?.appointment_date?.message}
+              </span>
             </div>
             <div className="form-group">
               <label>Hour</label>
@@ -94,8 +128,11 @@ const AppointmentViewForm = ({
                 name="hour"
                 disabled={disabledInput}
                 defaultValue={appointmentInfo.hour}
-                onChange={handleInputChange}
+                ref={register}
               />
+              <span className="form-error-message">
+                {errors?.hour?.message}
+              </span>
             </div>
 
             <div className="form-group button-container">
