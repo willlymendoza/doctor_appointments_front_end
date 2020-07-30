@@ -7,6 +7,9 @@ import axios from "axios";
 
 import "./styles.scss";
 import { useSelector } from "react-redux";
+import { useForm, Controller } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers";
+import useAppointmentFormValidation from "../../../hooks/useAppointmentFormValidation";
 
 const ViewAppointment = () => {
   const { id } = useParams();
@@ -17,18 +20,18 @@ const ViewAppointment = () => {
   const [disabledInput, setDisabledInput] = useState(true);
   const userToken = useSelector((store) => store.authData.userToken);
 
-  const handleInputChange = (e) => {
-    setAppointmentInfo({
-      ...appointmentInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const formValidation = useAppointmentFormValidation();
+  const { register, handleSubmit, errors, control, setValue } = useForm({
+    resolver: joiResolver(formValidation),
+  });
 
   const handleSelectChange = (newValue, actionMeta) => {
-    setAppointmentInfo({
-      ...appointmentInfo,
-      [actionMeta.name]: newValue._id,
-    });
+    if (actionMeta.name === "patient_id") {
+      setValue("patient_id", newValue._id, { shouldValidate: true });
+    }
+    if (actionMeta.name === "doctor_id") {
+      setValue("doctor_id", newValue._id, { shouldValidate: true });
+    }
   };
 
   const handleEditClick = (e) => {
@@ -36,23 +39,17 @@ const ViewAppointment = () => {
     setDisabledInput(false);
   };
 
-  const handleOnSubmit = (e) => {
-    axiosPostData();
-    e.preventDefault();
+  const onSubmitForm = (data) => {
+    axiosPostData(data);
   };
 
-  const axiosPostData = async () => {
+  const axiosPostData = async (data) => {
     try {
-      const { _id, id, ...postData } = appointmentInfo;
-      await axios.put(
-        `http://localhost:5000/api/appointments/${id}`,
-        postData,
-        {
-          headers: {
-            Authorization: userToken,
-          },
-        }
-      );
+      await axios.put(`http://localhost:5000/api/appointments/${id}`, data, {
+        headers: {
+          Authorization: userToken,
+        },
+      });
       setDisabledInput(true);
     } catch (error) {
       if (error.response) {
@@ -110,10 +107,8 @@ const ViewAppointment = () => {
           }
         );
 
-        setPatientInfo(result.data.patient);
-
         const { doctor, patient, ...appointmentData } = result.data;
-
+        setPatientInfo(patient);
         setAppointmentInfo(appointmentData);
       } catch (error) {
         if (error.response) console.log(error.response.data);
@@ -125,27 +120,36 @@ const ViewAppointment = () => {
 
   return (
     <Fragment>
-      {appointmentInfo ? (
-        <PageTitle
-          title={appointmentInfo.appointment_date + " " + appointmentInfo.hour}
-        />
+      {appointmentInfo && doctorsList && patientsList ? (
+        <Fragment>
+          <PageTitle
+            title={
+              appointmentInfo.appointment_date + " " + appointmentInfo.hour
+            }
+          />
+          <div className="appointment-info-container">
+            <AppointmentViewForm
+              appointmentInfo={appointmentInfo}
+              onSubmitForm={onSubmitForm}
+              patientsList={patientsList}
+              disabledInput={disabledInput}
+              handleSelectChange={handleSelectChange}
+              doctorsList={doctorsList}
+              handleEditClick={handleEditClick}
+              handleSubmit={handleSubmit}
+              register={register}
+              errors={errors}
+              control={control}
+              Controller={Controller}
+              setValue={setValue}
+            />
+
+            <AppointmentPatientInfo patientInfo={patientInfo} />
+          </div>
+        </Fragment>
       ) : (
         ""
       )}
-      <div className="appointment-info-container">
-        <AppointmentViewForm
-          appointmentInfo={appointmentInfo}
-          handleOnSubmit={handleOnSubmit}
-          patientsList={patientsList}
-          disabledInput={disabledInput}
-          handleSelectChange={handleSelectChange}
-          doctorsList={doctorsList}
-          handleInputChange={handleInputChange}
-          handleEditClick={handleEditClick}
-        />
-
-        <AppointmentPatientInfo patientInfo={patientInfo} />
-      </div>
     </Fragment>
   );
 };
