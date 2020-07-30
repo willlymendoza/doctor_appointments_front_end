@@ -4,39 +4,55 @@ import PageTitle from "../../../components/PageTitle";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import Joi from "@hapi/joi";
+import { useForm, Controller } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers";
 
 const AddAppointment = () => {
-  const formData = {
-    patient_id: "",
-    doctor_id: "",
-    observations: "",
-    appointment_date: "",
-    hour: "",
-  };
+  const useAppointmentFormValidation = Joi.object({
+    patient_id: Joi.string().required().messages({
+      "any.required": `"Patient" is required`,
+    }),
+    doctor_id: Joi.string().required().messages({
+      "any.required": `"Doctor" is required`,
+    }),
+    observations: Joi.string().trim().allow("").min(5).max(55).messages({
+      "string.min": `"Observations" must be at least 5 characters long`,
+      "string.max": `"Observations" can only be up to 55 characters long`,
+    }),
+    appointment_date: Joi.date().required().messages({
+      "date.base": `"Appointment Date" is required`,
+      "date.empty": `"Appointment Date" is required`,
+    }),
+    hour: Joi.string().trim().required().min(4).max(10).messages({
+      "string.empty": `"Hour" is required`,
+    }),
+  });
 
-  const [appointmentInfo, setAppointmentInfo] = useState(formData);
-  const [doctorsList, setDoctorsList] = useState([]);
+  const { register, handleSubmit, errors, control, setValue } = useForm({
+    resolver: joiResolver(useAppointmentFormValidation),
+  });
+
   const [patientsList, setPatientsList] = useState([]);
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [doctorsList, setDoctorsList] = useState([]);
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
   const { userToken } = useSelector((store) => store.authData);
   const history = useHistory();
 
-  const handleInputChange = (e) => {
-    setAppointmentInfo({
-      ...appointmentInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   const handleSelectChange = (newValue, actionMeta) => {
-    setAppointmentInfo({
-      ...appointmentInfo,
-      [actionMeta.name]: newValue._id,
-    });
+    if (actionMeta.name === "patient_id") {
+      setValue("patient_id", newValue._id, { shouldValidate: true });
+      setSelectedPatient(newValue._id);
+    }
+    if (actionMeta.name === "doctor_id") {
+      setValue("doctor_id", newValue._id, { shouldValidate: true });
+      setSelectedDoctor(newValue._id);
+    }
   };
 
-  const handleOnSubmit = (e) => {
-    axiosPostData();
-    e.preventDefault();
+  const onSubmitForm = (data) => {
+    axiosPostData(data);
   };
 
   useEffect(() => {
@@ -73,17 +89,13 @@ const AddAppointment = () => {
     getPatients();
   }, [userToken]);
 
-  const axiosPostData = async () => {
+  const axiosPostData = async (data) => {
     try {
-      await axios.post(
-        "http://localhost:5000/api/appointments",
-        appointmentInfo,
-        {
-          headers: {
-            Authorization: userToken,
-          },
-        }
-      );
+      await axios.post("http://localhost:5000/api/appointments", data, {
+        headers: {
+          Authorization: userToken,
+        },
+      });
       history.push("/appointments");
     } catch (error) {
       if (error.response) {
@@ -96,11 +108,17 @@ const AddAppointment = () => {
     <Fragment>
       <PageTitle title="ADD APPOINTMENT" />
       <AppointmentAddForm
-        handleOnSubmit={handleOnSubmit}
-        handleInputChange={handleInputChange}
+        onSubmitForm={onSubmitForm}
         handleSelectChange={handleSelectChange}
         patientsList={patientsList}
         doctorsList={doctorsList}
+        handleSubmit={handleSubmit}
+        register={register}
+        errors={errors}
+        selectedPatient={selectedPatient}
+        selectedDoctor={selectedDoctor}
+        control={control}
+        Controller={Controller}
       />
     </Fragment>
   );
