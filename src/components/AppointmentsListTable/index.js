@@ -10,14 +10,20 @@ import Table from "../Table";
 
 const AppointmentsListTable = () => {
   const [appointmentsData, setAppointmentsData] = useState([]);
+  const [activePage, setActivePage] = useState(1);
+  const [totalData, setTotalData] = useState(0);
 
   const userToken = useSelector((store) => store.authData.userToken);
+
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+  };
 
   useEffect(() => {
     const getAppointments = async () => {
       try {
         const getListAppointments = await axios.get(
-          "http://localhost:5000/api/appointments",
+          `http://localhost:5000/api/appointments?pageNumber=${activePage}&pageSize=5`,
           {
             headers: {
               Authorization: userToken,
@@ -25,14 +31,15 @@ const AppointmentsListTable = () => {
           }
         );
         const result = getListAppointments.data;
-        setAppointmentsData(result);
+        setAppointmentsData(result.appointments);
+        setTotalData(result.count);
       } catch (error) {
         if (error.response) console.log(error.response.data);
       }
     };
 
     getAppointments();
-  }, [userToken]);
+  }, [activePage, userToken]);
 
   return (
     <Fragment>
@@ -69,10 +76,11 @@ const AppointmentsListTable = () => {
       </CardContainer>
       <CustomPagination
         color="warning"
-        activePage={3}
-        itemsCountPerPage={10}
-        totalItemsCount={100}
+        activePage={activePage}
+        itemsCountPerPage={5}
+        totalItemsCount={totalData}
         pageRangeDisplayed={5}
+        handlePageChange={handlePageChange}
       />
     </Fragment>
   );
