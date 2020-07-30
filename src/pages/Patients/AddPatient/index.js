@@ -9,7 +9,7 @@ import { joiResolver } from "@hookform/resolvers";
 import Joi from "@hapi/joi";
 
 const AddPatient = () => {
-  const schemaValidation = Joi.object({
+  const usePatientFormValidation = Joi.object({
     first_name: Joi.string().trim().required().min(5).max(55).messages({
       "string.empty": `"First Name" is required`,
       "string.min": `"First Name" must be at least 5 characters long`,
@@ -78,7 +78,7 @@ const AddPatient = () => {
 
   const userToken = useSelector((store) => store.authData.userToken);
   const { register, handleSubmit, errors } = useForm({
-    resolver: joiResolver(schemaValidation),
+    resolver: joiResolver(usePatientFormValidation),
   });
   const history = useHistory();
 
