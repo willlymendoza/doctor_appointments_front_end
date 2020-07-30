@@ -7,6 +7,9 @@ import "./styles.scss";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import PatientAppointmentsList from "../PatientAppointmentsList";
+import { useForm } from "react-hook-form";
+import { joiResolver } from "@hookform/resolvers";
+import usePatientFormValidation from "../../../hooks/usePatientFormValidation";
 
 const ViewPatient = () => {
   const { id } = useParams();
@@ -14,28 +17,24 @@ const ViewPatient = () => {
   const [appointmentsInfo, setAppointmentsInfo] = useState([]);
   const [disabledInput, setDisabledInput] = useState(true);
   const userToken = useSelector((store) => store.authData.userToken);
+  const formValidation = usePatientFormValidation();
 
-  const handleInputChange = (e) => {
-    setPatientInfo({
-      ...patientInfo,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const { register, handleSubmit, errors } = useForm({
+    resolver: joiResolver(formValidation),
+  });
 
   const handleEditClick = (e) => {
     e.preventDefault();
     setDisabledInput(false);
   };
 
-  const handleOnSubmit = (e) => {
-    axiosPostData();
-    e.preventDefault();
+  const onSubmitForm = (data) => {
+    axiosPostData(data);
   };
 
-  const axiosPostData = async () => {
+  const axiosPostData = async (data) => {
     try {
-      const { _id, ...postData } = patientInfo;
-      await axios.put(`http://localhost:5000/api/patients/${id}`, postData, {
+      await axios.put(`http://localhost:5000/api/patients/${id}`, data, {
         headers: {
           Authorization: userToken,
         },
@@ -94,10 +93,12 @@ const ViewPatient = () => {
       <div className="patient-info-container">
         <PatientViewForm
           patientInfo={patientInfo}
-          handleOnSubmit={handleOnSubmit}
+          onSubmitForm={onSubmitForm}
           disabledInput={disabledInput}
-          handleInputChange={handleInputChange}
           handleEditClick={handleEditClick}
+          register={register}
+          handleSubmit={handleSubmit}
+          errors={errors}
         />
 
         <PatientAppointmentsList appointmentsInfo={appointmentsInfo} />
