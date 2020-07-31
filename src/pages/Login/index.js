@@ -4,8 +4,8 @@ import PageTitle from "../../components/PageTitle";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import { setLoginAction } from "../../redux/authDuck";
+import { login } from "../../services/loginService";
 
 const Login = () => {
   const [requestError, setRequestError] = useState(null);
@@ -21,7 +21,7 @@ const Login = () => {
 
   const axiosPostData = async (data) => {
     try {
-      const result = await axios.post("http://localhost:5000/api/auth", data);
+      const result = await login(data);
 
       dispatch(
         setLoginAction({
