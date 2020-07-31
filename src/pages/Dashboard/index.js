@@ -10,27 +10,22 @@ import useFetch from "../../hooks/useFetch";
 const Dashboard = () => {
   const userToken = useSelector((store) => store.authData.userToken);
   const appointmentsList = useFetch({
-    method: "GET",
     url: "/appointments/recent/5",
     userToken,
   });
   const recentPatients = useFetch({
-    method: "GET",
     url: "/patients/recent/5",
     userToken,
   });
   const totalPatients = useFetch({
-    method: "GET",
     url: "/patients/total",
     userToken,
   });
   const totalAppointments = useFetch({
-    method: "GET",
     url: "/appointments/total",
     userToken,
   });
   const todayAppointments = useFetch({
-    method: "GET",
     url: "/appointments/today",
     userToken,
   });
