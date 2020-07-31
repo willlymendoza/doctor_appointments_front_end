@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import http from "../http-common";
 
-const useFetch = ({ url, method, data = "", userToken }) => {
+const useFetch = ({ url, method, userToken }) => {
   const [response, setResponse] = useState([]);
   const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     let didCancel = false;
+
     const getData = async () => {
       setIsLoading(true);
       try {
         const result = await http(userToken)({
-          method,
+          method: "GET",
           url,
-          data,
         });
         if (!didCancel) setResponse(result.data);
       } catch (error) {
@@ -22,12 +22,13 @@ const useFetch = ({ url, method, data = "", userToken }) => {
       }
       setIsLoading(false);
     };
+
     getData();
 
     return () => {
       didCancel = true;
     };
-  }, [data, method, url, userToken]);
+  }, [method, url, userToken]);
 
   return { response, error, isLoading };
 };
