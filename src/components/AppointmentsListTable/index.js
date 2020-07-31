@@ -1,46 +1,15 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import CardContainer from "../../components/CardContainer";
 import CustomPagination from "../../components/CustomPagination";
-import axios from "axios";
-
-import "./styles.scss";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import Table from "../Table";
+import "./styles.scss";
 
-const AppointmentsListTable = () => {
-  const [appointmentsData, setAppointmentsData] = useState([]);
-  const [activePage, setActivePage] = useState(1);
-  const [totalData, setTotalData] = useState(0);
-
-  const userToken = useSelector((store) => store.authData.userToken);
-
-  const handlePageChange = (pageNumber) => {
-    setActivePage(pageNumber);
-  };
-
-  useEffect(() => {
-    const getAppointments = async () => {
-      try {
-        const getListAppointments = await axios.get(
-          `http://localhost:5000/api/appointments?pageNumber=${activePage}&pageSize=5`,
-          {
-            headers: {
-              Authorization: userToken,
-            },
-          }
-        );
-        const result = getListAppointments.data;
-        setAppointmentsData(result.appointments);
-        setTotalData(result.count);
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-
-    getAppointments();
-  }, [activePage, userToken]);
-
+const AppointmentsListTable = ({
+  appointmentsData,
+  handlePageChange,
+  activePage,
+}) => {
   return (
     <Fragment>
       <NavLink to="/appointments/add">
@@ -70,7 +39,7 @@ const AppointmentsListTable = () => {
               type: "object",
             },
           ]}
-          data={appointmentsData}
+          data={appointmentsData.response.appointments}
           actions={{ link: "/appointments" }}
         />
       </CardContainer>
@@ -78,7 +47,7 @@ const AppointmentsListTable = () => {
         color="warning"
         activePage={activePage}
         itemsCountPerPage={5}
-        totalItemsCount={totalData}
+        totalItemsCount={appointmentsData.response.count}
         pageRangeDisplayed={5}
         handlePageChange={handlePageChange}
       />
