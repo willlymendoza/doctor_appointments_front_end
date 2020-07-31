@@ -1,115 +1,39 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment } from "react";
 import CardContainer from "../../components/CardContainer";
 import DashBoardCard from "../../components/DashBoardCard";
 import PageTitle from "../../components/PageTitle";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Table from "../../components/Table";
+import useFetch from "../../hooks/useFetch";
 
 const Dashboard = () => {
-  const [recentAppointments, setRecentAppointments] = useState([]);
-  const [recentPatients, setRecentPatients] = useState([]);
-  const [totalPatients, setTotalPatients] = useState(0);
-  const [totalAppointments, setTotalAppointments] = useState(0);
-  const [todayAppointments, setTodayAppointments] = useState(0);
-
   const userToken = useSelector((store) => store.authData.userToken);
-
-  useEffect(() => {
-    const getRecentAppointments = async () => {
-      try {
-        const getAppointmentsList = await axios.get(
-          "http://localhost:5000/api/appointments/recent/5",
-          {
-            headers: {
-              Authorization: userToken,
-            },
-          }
-        );
-        const result = getAppointmentsList.data;
-        setRecentAppointments(result);
-      } catch (error) {}
-    };
-    getRecentAppointments();
-  }, [userToken]);
-
-  useEffect(() => {
-    const getRecentPatients = async () => {
-      try {
-        const getPatientsList = await axios.get(
-          "http://localhost:5000/api/patients/recent/5",
-          {
-            headers: {
-              Authorization: userToken,
-            },
-          }
-        );
-        const result = getPatientsList.data;
-        setRecentPatients(result);
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-    getRecentPatients();
-  }, [userToken]);
-
-  useEffect(() => {
-    const getTotalPatients = async () => {
-      try {
-        const result = await axios.get(
-          "http://localhost:5000/api/patients/total",
-          {
-            headers: {
-              Authorization: userToken,
-            },
-          }
-        );
-        setTotalPatients(result.data.total);
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-    getTotalPatients();
-  }, [userToken]);
-
-  useEffect(() => {
-    const getTotalAppointments = async () => {
-      try {
-        const result = await axios.get(
-          "http://localhost:5000/api/appointments/total",
-          {
-            headers: {
-              Authorization: userToken,
-            },
-          }
-        );
-        setTotalAppointments(result.data.total);
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-    getTotalAppointments();
-  }, [userToken]);
-
-  useEffect(() => {
-    const getTodayAppointments = async () => {
-      try {
-        const result = await axios.get(
-          "http://localhost:5000/api/appointments/today",
-          {
-            headers: {
-              Authorization: userToken,
-            },
-          }
-        );
-        setTodayAppointments(result.data.total);
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-    getTodayAppointments();
-  }, [userToken]);
+  const appointmentsList = useFetch({
+    method: "GET",
+    url: "/appointments/recent/5",
+    userToken,
+  });
+  const recentPatients = useFetch({
+    method: "GET",
+    url: "/patients/recent/5",
+    userToken,
+  });
+  const totalPatients = useFetch({
+    method: "GET",
+    url: "/patients/total",
+    userToken,
+  });
+  const totalAppointments = useFetch({
+    method: "GET",
+    url: "/appointments/total",
+    userToken,
+  });
+  const todayAppointments = useFetch({
+    method: "GET",
+    url: "/appointments/today",
+    userToken,
+  });
 
   return (
     <Fragment>
@@ -119,53 +43,57 @@ const Dashboard = () => {
         <DashBoardCard
           title="Patients"
           color="secondary_color"
-          quantity={totalPatients}
+          quantity={totalPatients.response.total}
         />
         <DashBoardCard
           title="Appointments"
           color="info_color"
-          quantity={totalAppointments}
+          quantity={totalAppointments.response.total}
         />
         <DashBoardCard
           title="Today's Appointments"
           color="warning_color"
-          quantity={todayAppointments}
+          quantity={todayAppointments.response.total}
         />
       </div>
 
       <div className="dashboard-tables">
-        <CardContainer
-          title="Recent Registered Appointments"
-          color="warning_color"
-        >
-          <Table
-            labels={[
-              { label: "Date", value: "appointment_date" },
-              { label: "Hour", value: ["hour"] },
-              {
-                label: "Patient",
-                value: "patient",
-                child: ["first_name", "last_name"],
-                type: "object",
-              },
-              {
-                label: "Doctor",
-                value: "doctor",
-                child: ["name", "last_name"],
-                type: "object",
-              },
-            ]}
-            data={recentAppointments}
-          />
-          <div className="table-grid table-content" style={{ marginTop: 50 }}>
-            <Link
-              className="button button-right bg-warning-color"
-              to="/appointments"
-            >
-              view full list
-            </Link>
-          </div>
-        </CardContainer>
+        {appointmentsList.isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <CardContainer
+            title="Recent Registered Appointments"
+            color="warning_color"
+          >
+            <Table
+              labels={[
+                { label: "Date", value: "appointment_date" },
+                { label: "Hour", value: ["hour"] },
+                {
+                  label: "Patient",
+                  value: "patient",
+                  child: ["first_name", "last_name"],
+                  type: "object",
+                },
+                {
+                  label: "Doctor",
+                  value: "doctor",
+                  child: ["name", "last_name"],
+                  type: "object",
+                },
+              ]}
+              data={appointmentsList.response}
+            />
+            <div className="table-grid table-content" style={{ marginTop: 50 }}>
+              <Link
+                className="button button-right bg-warning-color"
+                to="/appointments"
+              >
+                view full list
+              </Link>
+            </div>
+          </CardContainer>
+        )}
 
         <CardContainer
           title="Recent Registered Patients"
@@ -177,7 +105,7 @@ const Dashboard = () => {
               { label: "E-mail", value: "email" },
               { label: "Registered Date", value: "created_at" },
             ]}
-            data={recentPatients}
+            data={recentPatients.response}
           />
           <div className="table-grid table-content" style={{ marginTop: 50 }}>
             <Link
