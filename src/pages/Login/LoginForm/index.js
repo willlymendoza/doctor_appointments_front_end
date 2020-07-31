@@ -7,7 +7,6 @@ const LoginForm = ({
   handleSubmit,
   onSubmitForm,
   register,
-  formValidations,
   errors,
   requestError,
 }) => {
@@ -18,23 +17,14 @@ const LoginForm = ({
           <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
             <div className="form-group full-width">
               <label>E-mail</label>
-              <input
-                type="text"
-                name="email"
-                autoFocus
-                ref={register(formValidations.email)}
-              />
+              <input type="text" name="email" autoFocus ref={register} />
               <span className="form-error-message">
                 {errors?.email?.message}
               </span>
             </div>
             <div className="form-group full-width">
               <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                ref={register(formValidations.password)}
-              />
+              <input type="password" name="password" ref={register} />
               <span className="form-error-message">
                 {errors?.password?.message}
               </span>

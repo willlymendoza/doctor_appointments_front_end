@@ -6,11 +6,16 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setLoginAction } from "../../redux/authDuck";
 import { login } from "../../services/loginService";
+import { joiResolver } from "@hookform/resolvers";
+import useLoginFormValidation from "../../hooks/useLoginFormValidation";
 
 const Login = () => {
+  const formValidation = useLoginFormValidation();
   const [requestError, setRequestError] = useState(null);
 
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, errors } = useForm({
+    resolver: joiResolver(formValidation),
+  });
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -38,26 +43,6 @@ const Login = () => {
     }
   };
 
-  const formValidations = {
-    email: {
-      required: {
-        value: true,
-        message: "Email is Required",
-      },
-      pattern: {
-        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        message: "Invalid Email Address",
-      },
-    },
-    password: {
-      required: { value: true, message: "Password is Required" },
-      minLength: {
-        value: 6,
-        message: "Password length must be at least 6 characters long",
-      },
-    },
-  };
-
   return (
     <Fragment>
       <PageTitle title="LOGIN" />
@@ -65,7 +50,6 @@ const Login = () => {
         handleSubmit={handleSubmit}
         onSubmitForm={onSubmitForm}
         register={register}
-        formValidations={formValidations}
         errors={errors}
         requestError={requestError}
       />
