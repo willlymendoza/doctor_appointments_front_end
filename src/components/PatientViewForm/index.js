@@ -11,7 +11,7 @@ const PatientViewForm = ({
   errors,
 }) => {
   return (
-    <div className="form-container">
+    <div className="form-container patient-form">
       <CardContainer title="Patient Info" color="secondary_color">
         <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
           <div className="form-group">
