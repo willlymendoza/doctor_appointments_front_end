@@ -42,6 +42,12 @@ a {
   text-decoration: none;
 }
 
+@mixin media-sm {
+  @media screen and (max-width: 600px) {
+    @content;
+  }
+}
+
 @mixin media-md {
   @media screen and (max-width: 768px) {
     @content;
