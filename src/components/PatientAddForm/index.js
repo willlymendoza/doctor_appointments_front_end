@@ -9,7 +9,7 @@ const PatientAddForm = ({
   requestError,
 }) => {
   return (
-    <div className="form-container patient-form">
+    <div className="form-container patient-form add-form-container">
       <CardContainer title="Patient Info" color="secondary_color">
         <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
           <div className="form-group">
