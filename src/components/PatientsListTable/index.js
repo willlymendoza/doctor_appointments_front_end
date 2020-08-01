@@ -34,7 +34,7 @@ const PatientsListTable = ({ patientsData, handlePageChange, activePage }) => {
         activePage={activePage}
         itemsCountPerPage={5}
         totalItemsCount={patientsData.response.count}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={3}
         handlePageChange={handlePageChange}
       />
     </Fragment>
