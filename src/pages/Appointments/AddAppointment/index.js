@@ -8,6 +8,7 @@ import { joiResolver } from "@hookform/resolvers";
 import useAppointmentFormValidation from "../../../hooks/useAppointmentFormValidation";
 import { postNew } from "../../../services/appointmentService";
 import useFetch from "../../../hooks/useFetch";
+import PageLoading from "../../../components/PageLoading";
 
 const AddAppointment = () => {
   const formValidation = useAppointmentFormValidation();
@@ -57,7 +58,7 @@ const AddAppointment = () => {
   return (
     <Fragment>
       {patientsList.isLoading || doctorsList.isLoading ? (
-        <div>Loading...</div>
+        <PageLoading />
       ) : (
         <Fragment>
           <PageTitle title="ADD APPOINTMENT" />

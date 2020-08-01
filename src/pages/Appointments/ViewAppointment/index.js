@@ -10,6 +10,7 @@ import useAppointmentFormValidation from "../../../hooks/useAppointmentFormValid
 import useFetch from "../../../hooks/useFetch";
 import { update } from "../../../services/appointmentService";
 import "./styles.scss";
+import PageLoading from "../../../components/PageLoading";
 
 const ViewAppointment = (props) => {
   const { id } = useParams();
@@ -72,7 +73,7 @@ const ViewAppointment = (props) => {
       {appointmentInfo.isLoading ||
       patientsList.isLoading ||
       doctorsList.isLoading ? (
-        <div>Loading...</div>
+        <PageLoading />
       ) : (
         <Fragment>
           <PageTitle
