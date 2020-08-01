@@ -48,7 +48,7 @@ const AppointmentsListTable = ({
         activePage={activePage}
         itemsCountPerPage={5}
         totalItemsCount={appointmentsData.response.count}
-        pageRangeDisplayed={5}
+        pageRangeDisplayed={3}
         handlePageChange={handlePageChange}
       />
     </Fragment>
