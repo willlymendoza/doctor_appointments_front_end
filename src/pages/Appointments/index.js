@@ -3,6 +3,7 @@ import PageTitle from "../../components/PageTitle";
 import AppointmentsListTable from "../../components/AppointmentsListTable";
 import { useSelector } from "react-redux";
 import useFetch from "../../hooks/useFetch";
+import PageLoading from "../../components/PageLoading";
 
 const Appointments = () => {
   const [activePage, setActivePage] = useState(1);
@@ -19,7 +20,7 @@ const Appointments = () => {
   return (
     <Fragment>
       {appointmentsData.isLoading ? (
-        <div>Loading...</div>
+        <PageLoading />
       ) : (
         <Fragment>
           <PageTitle title="APPOINTMENTS" />
