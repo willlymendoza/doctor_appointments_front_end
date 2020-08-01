@@ -42,6 +42,24 @@ a {
   text-decoration: none;
 }
 
+@mixin media-md {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @media screen and (max-width: 992px) {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
 :export {
   primary_color: $primary-color;
   secondary_color: $secondary-color;
