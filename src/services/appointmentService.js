@@ -5,5 +5,5 @@ export const postNew = (data, token) => {
 };
 
 export const update = (id, data, token) => {
-  return http(token).put(`/appointment/${id}`, data);
+  return http(token).put(`/appointments/${id}`, data);
 };
