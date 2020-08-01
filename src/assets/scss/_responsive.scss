@@ -1,4 +1,69 @@
+@include media-sm {
+  .table-grid.table-header {
+    display: none;
+  }
+
+  .table-grid.table-content {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 5px 0px $border-color;
+    margin-bottom: 30px;
+    padding: 15px;
+
+    .responsive-label {
+      display: block;
+      padding: 0;
+    }
+
+    .actions a {
+      font-size: 25px;
+    }
+
+    span {
+      border: none;
+      padding: 5px 0px;
+    }
+  }
+
+  .page-title {
+    font-size: 18px !important;
+  }
+
+  .card-container {
+    .card-header {
+      padding-left: 10px !important;
+
+      h2 {
+        font-size: 18px !important;
+      }
+    }
+
+    .card-content {
+      padding-left: 10px !important;
+      padding-right: 10px !important;
+    }
+  }
+
+  .footer-content {
+    h1 {
+      font-size: 18px !important;
+    }
+    h2 {
+      font-size: 1rem !important;
+    }
+  }
+}
+
 @include media-md {
+  .main-content,
+  .header-content {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .menu-btn {
+    right: 10px !important;
+  }
 }
 
 @include media-lg {
@@ -30,6 +95,7 @@
     a {
       font-weight: 300;
       font-size: 35px !important;
+      margin: 0 !important;
     }
 
     &.open {
