@@ -1,0 +1,59 @@
+@include media-md {
+}
+
+@include media-lg {
+  .dashboard-cards {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .menu-btn {
+    visibility: visible !important;
+  }
+
+  .nav-bar {
+    visibility: hidden;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.99;
+    background: $primary-color;
+    transform: translateY(-100%);
+    transition: all 0.5s ease;
+
+    a {
+      font-weight: 300;
+      font-size: 35px !important;
+    }
+
+    &.open {
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  .header-content {
+    position: fixed;
+    width: 100%;
+  }
+}
+
+@include media-xl {
+  .dashboard-cards {
+    gap: 10px !important;
+  }
+
+  .dashboard-tables {
+    grid-template-columns: 1fr !important;
+  }
+
+  .active-link {
+    color: $secondary-color !important;
+  }
+}
