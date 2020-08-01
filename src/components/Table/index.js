@@ -16,6 +16,7 @@ const Table = ({ labels, data, actions }) => {
         <div key={item._id} className="table-grid table-content">
           {labels.map((label, index) => (
             <Fragment key={index}>
+              <span className="responsive-label">{label.label}</span>
               {label.type === "object" ? (
                 <Fragment>
                   {Array.isArray(label.child) ? (
@@ -51,11 +52,13 @@ const Table = ({ labels, data, actions }) => {
           ))}
 
           {actions ? (
-            <span className="actions">
-              <Link to={`${actions.link}/${item._id}`} className="view_item">
-                <i className="fas fa-eye"></i>
-              </Link>
-            </span>
+            <Fragment>
+              <span className="actions">
+                <Link to={`${actions.link}/${item._id}`} className="view_item">
+                  <i className="fas fa-eye"></i>
+                </Link>
+              </span>
+            </Fragment>
           ) : (
             ""
           )}
