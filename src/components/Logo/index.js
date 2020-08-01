@@ -6,7 +6,7 @@ const Logo = () => {
   return (
     <div className="logo">
       <NavLink to="/">
-        <h1>Logo here</h1>
+        <h1>Logo</h1>
       </NavLink>
     </div>
   );
