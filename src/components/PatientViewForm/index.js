@@ -9,6 +9,7 @@ const PatientViewForm = ({
   register,
   handleSubmit,
   errors,
+  requestError,
 }) => {
   return (
     <div className="form-container patient-form">
@@ -114,6 +115,15 @@ const PatientViewForm = ({
             />
             <span className="form-error-message">{errors?.sex?.message}</span>
           </div>
+
+          {requestError ? (
+            <span className="form-error-message form-group full-width">
+              {requestError}
+            </span>
+          ) : (
+            ""
+          )}
+
           <div className="form-group button-container">
             {!disabledInput ? (
               <button

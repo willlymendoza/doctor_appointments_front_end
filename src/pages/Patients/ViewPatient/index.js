@@ -23,6 +23,7 @@ const ViewPatient = () => {
     userToken,
   });
   const [disabledInput, setDisabledInput] = useState(true);
+  const [requestError, setRequestError] = useState(null);
   const formValidation = usePatientFormValidation();
 
   const { register, handleSubmit, errors } = useForm({
@@ -44,7 +45,7 @@ const ViewPatient = () => {
       setDisabledInput(true);
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data);
+        setRequestError(error.response.data);
       }
     }
   };
@@ -66,6 +67,7 @@ const ViewPatient = () => {
             <PatientViewForm
               patientInfo={patientInfo.response}
               onSubmitForm={onSubmitForm}
+              requestError={requestError}
               disabledInput={disabledInput}
               handleEditClick={handleEditClick}
               register={register}
