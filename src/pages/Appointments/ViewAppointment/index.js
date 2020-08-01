@@ -1,25 +1,32 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
 import PageTitle from "../../../components/PageTitle";
 import AppointmentViewForm from "../../../components/AppointmentViewForm";
 import AppointmentPatientInfo from "../AppointmentPatientInfo";
-import axios from "axios";
-
-import "./styles.scss";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers";
 import useAppointmentFormValidation from "../../../hooks/useAppointmentFormValidation";
+import useFetch from "../../../hooks/useFetch";
+import { update } from "../../../services/appointmentService";
+import "./styles.scss";
 
-const ViewAppointment = () => {
+const ViewAppointment = (props) => {
   const { id } = useParams();
-  const [appointmentInfo, setAppointmentInfo] = useState(null);
-  const [patientInfo, setPatientInfo] = useState([]);
-  const [patientsList, setPatientsList] = useState([]);
-  const [doctorsList, setDoctorsList] = useState([]);
-  const [disabledInput, setDisabledInput] = useState(true);
   const userToken = useSelector((store) => store.authData.userToken);
-
+  const appointmentInfo = useFetch({
+    url: `/appointments/${id}`,
+    userToken,
+  });
+  const patientsList = useFetch({
+    url: "/patients",
+    userToken,
+  });
+  const doctorsList = useFetch({
+    url: "/users?isDoctor=1",
+    userToken,
+  });
+  const [disabledInput, setDisabledInput] = useState(true);
   const formValidation = useAppointmentFormValidation();
   const { register, handleSubmit, errors, control, setValue } = useForm({
     resolver: joiResolver(formValidation),
@@ -43,14 +50,16 @@ const ViewAppointment = () => {
     axiosPostData(data);
   };
 
+  const reload = () => {
+    props.history.push("/temp");
+    props.history.replace({ pathname: `/appointments/${id}` });
+  };
+
   const axiosPostData = async (data) => {
     try {
-      await axios.put(`http://localhost:5000/api/appointments/${id}`, data, {
-        headers: {
-          Authorization: userToken,
-        },
-      });
+      await update(id, data, userToken);
       setDisabledInput(true);
+      reload();
     } catch (error) {
       if (error.response) {
         console.log(error.response.data);
@@ -58,83 +67,29 @@ const ViewAppointment = () => {
     }
   };
 
-  /* getting list of doctors */
-  useEffect(() => {
-    const getDoctors = async () => {
-      try {
-        const result = await axios.get("http://localhost:5000/api/users", {
-          headers: {
-            Authorization: userToken,
-          },
-        });
-
-        setDoctorsList(result.data.filter((item) => item.is_doctor === true));
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-    getDoctors();
-  }, [userToken]);
-
-  /* getting list of patients */
-  useEffect(() => {
-    const getPatients = async () => {
-      try {
-        const result = await axios.get("http://localhost:5000/api/patients", {
-          headers: {
-            Authorization: userToken,
-          },
-        });
-
-        setPatientsList(result.data);
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-    getPatients();
-  }, [userToken]);
-
-  /* getting appointment info */
-  useEffect(() => {
-    const getAppointmentInfo = async () => {
-      try {
-        const result = await axios.get(
-          `http://localhost:5000/api/appointments/${id}`,
-          {
-            headers: {
-              Authorization: userToken,
-            },
-          }
-        );
-
-        const { doctor, patient, ...appointmentData } = result.data;
-        setPatientInfo(patient);
-        setAppointmentInfo(appointmentData);
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-
-    getAppointmentInfo();
-  }, [id, userToken]);
-
   return (
     <Fragment>
-      {appointmentInfo && doctorsList && patientsList ? (
+      {appointmentInfo.isLoading ||
+      patientsList.isLoading ||
+      doctorsList.isLoading ? (
+        <div>Loading...</div>
+      ) : (
         <Fragment>
           <PageTitle
             title={
-              appointmentInfo.appointment_date + " " + appointmentInfo.hour
+              appointmentInfo.response.appointment_date +
+              " " +
+              appointmentInfo.response.hour
             }
           />
           <div className="appointment-info-container">
             <AppointmentViewForm
-              appointmentInfo={appointmentInfo}
+              appointmentInfo={appointmentInfo.response}
               onSubmitForm={onSubmitForm}
-              patientsList={patientsList}
+              patientsList={patientsList.response}
+              doctorsList={doctorsList.response}
               disabledInput={disabledInput}
               handleSelectChange={handleSelectChange}
-              doctorsList={doctorsList}
               handleEditClick={handleEditClick}
               handleSubmit={handleSubmit}
               register={register}
@@ -144,11 +99,11 @@ const ViewAppointment = () => {
               setValue={setValue}
             />
 
-            <AppointmentPatientInfo patientInfo={patientInfo} />
+            <AppointmentPatientInfo
+              patientInfo={appointmentInfo.response.patient}
+            />
           </div>
         </Fragment>
-      ) : (
-        ""
       )}
     </Fragment>
   );
