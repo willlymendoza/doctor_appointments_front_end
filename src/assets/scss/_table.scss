@@ -12,6 +12,11 @@
   }
 
   &.table-content {
+    .responsive-label {
+      display: none;
+      font-weight: 400;
+    }
+
     label {
       display: none;
     }
