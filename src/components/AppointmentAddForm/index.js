@@ -24,7 +24,7 @@ const AppointmentForm = ({
   };
 
   return (
-    <div className="form-container">
+    <div className="form-container add-form-container">
       <CardContainer title="Appointment Info" color="warning_color">
         <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
           <div className="form-group full-width">
