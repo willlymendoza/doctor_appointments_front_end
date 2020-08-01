@@ -3,6 +3,7 @@ import PageTitle from "../../components/PageTitle";
 import PatientsListTable from "../../components/PatientsListTable";
 import { useSelector } from "react-redux";
 import useFetch from "../../hooks/useFetch";
+import PageLoading from "../../components/PageLoading";
 
 const Patients = () => {
   const userToken = useSelector((store) => store.authData.userToken);
@@ -19,7 +20,7 @@ const Patients = () => {
   return (
     <Fragment>
       {patientsData.isLoading ? (
-        <div>Loading...</div>
+        <PageLoading />
       ) : (
         <Fragment>
           <PageTitle title="PATIENTS" />

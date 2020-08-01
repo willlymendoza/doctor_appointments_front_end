@@ -10,6 +10,7 @@ import usePatientFormValidation from "../../../hooks/usePatientFormValidation";
 import useFetch from "../../../hooks/useFetch";
 import { update } from "../../../services/patientService";
 import "./styles.scss";
+import PageLoading from "../../../components/PageLoading";
 
 const ViewPatient = () => {
   const { id } = useParams();
@@ -53,7 +54,7 @@ const ViewPatient = () => {
   return (
     <Fragment>
       {patientInfo.isLoading ? (
-        <div>Loading...</div>
+        <PageLoading />
       ) : (
         <Fragment>
           <PageTitle
