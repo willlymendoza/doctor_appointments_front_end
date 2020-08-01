@@ -1,24 +1,31 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState } from "react";
 import AppointmentAddForm from "../../../components/AppointmentAddForm";
 import PageTitle from "../../../components/PageTitle";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
 import { useForm, Controller } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers";
 import useAppointmentFormValidation from "../../../hooks/useAppointmentFormValidation";
+import { postNew } from "../../../services/appointmentService";
+import useFetch from "../../../hooks/useFetch";
 
 const AddAppointment = () => {
   const formValidation = useAppointmentFormValidation();
   const { register, handleSubmit, errors, control, setValue } = useForm({
     resolver: joiResolver(formValidation),
   });
-
-  const [patientsList, setPatientsList] = useState([]);
-  const [selectedPatient, setSelectedPatient] = useState(null);
-  const [doctorsList, setDoctorsList] = useState([]);
-  const [selectedDoctor, setSelectedDoctor] = useState(null);
   const { userToken } = useSelector((store) => store.authData);
+
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const doctorsList = useFetch({
+    url: "/users?isDoctor=1",
+    userToken,
+  });
+  const patientsList = useFetch({
+    url: "/patients",
+    userToken,
+  });
+  const [selectedDoctor, setSelectedDoctor] = useState(null);
   const history = useHistory();
 
   const handleSelectChange = (newValue, actionMeta) => {
@@ -36,47 +43,9 @@ const AddAppointment = () => {
     axiosPostData(data);
   };
 
-  useEffect(() => {
-    const getDoctors = async () => {
-      try {
-        const result = await axios.get("http://localhost:5000/api/users", {
-          headers: {
-            Authorization: userToken,
-          },
-        });
-
-        setDoctorsList(result.data.filter((item) => item.is_doctor === true));
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-    getDoctors();
-  }, [userToken]);
-
-  useEffect(() => {
-    const getPatients = async () => {
-      try {
-        const result = await axios.get("http://localhost:5000/api/patients", {
-          headers: {
-            Authorization: userToken,
-          },
-        });
-
-        setPatientsList(result.data);
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-    getPatients();
-  }, [userToken]);
-
   const axiosPostData = async (data) => {
     try {
-      await axios.post("http://localhost:5000/api/appointments", data, {
-        headers: {
-          Authorization: userToken,
-        },
-      });
+      await postNew(data, userToken);
       history.push("/appointments");
     } catch (error) {
       if (error.response) {
@@ -87,20 +56,26 @@ const AddAppointment = () => {
 
   return (
     <Fragment>
-      <PageTitle title="ADD APPOINTMENT" />
-      <AppointmentAddForm
-        onSubmitForm={onSubmitForm}
-        handleSelectChange={handleSelectChange}
-        patientsList={patientsList}
-        doctorsList={doctorsList}
-        handleSubmit={handleSubmit}
-        register={register}
-        errors={errors}
-        selectedPatient={selectedPatient}
-        selectedDoctor={selectedDoctor}
-        control={control}
-        Controller={Controller}
-      />
+      {patientsList.isLoading || doctorsList.isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <Fragment>
+          <PageTitle title="ADD APPOINTMENT" />
+          <AppointmentAddForm
+            onSubmitForm={onSubmitForm}
+            handleSelectChange={handleSelectChange}
+            patientsList={patientsList.response}
+            doctorsList={doctorsList.response}
+            handleSubmit={handleSubmit}
+            register={register}
+            errors={errors}
+            selectedPatient={selectedPatient}
+            selectedDoctor={selectedDoctor}
+            control={control}
+            Controller={Controller}
+          />
+        </Fragment>
+      )}
     </Fragment>
   );
 };
