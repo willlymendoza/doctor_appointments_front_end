@@ -1,46 +1,11 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import CardContainer from "../../components/CardContainer";
 import CustomPagination from "../../components/CustomPagination";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import axios from "axios";
-
-import "./styles.scss";
 import Table from "../Table";
+import "./styles.scss";
 
-const PatientsListTable = () => {
-  const [patientsData, setPatientsData] = useState([]);
-  const [activePage, setActivePage] = useState(1);
-  const [totalData, setTotalData] = useState(0);
-
-  const userToken = useSelector((store) => store.authData.userToken);
-
-  const handlePageChange = (pageNumber) => {
-    setActivePage(pageNumber);
-  };
-
-  useEffect(() => {
-    const getPatients = async () => {
-      try {
-        const getListPatients = await axios.get(
-          `http://localhost:5000/api/patients?pageNumber=${activePage}&pageSize=5`,
-          {
-            headers: {
-              Authorization: userToken,
-            },
-          }
-        );
-        const result = getListPatients.data;
-        setPatientsData(result.patients);
-        setTotalData(result.count);
-      } catch (error) {
-        if (error.response) console.log(error.response.data);
-      }
-    };
-
-    getPatients();
-  }, [activePage, userToken]);
-
+const PatientsListTable = ({ patientsData, handlePageChange, activePage }) => {
   return (
     <Fragment>
       <NavLink to="/patients/add">
@@ -60,7 +25,7 @@ const PatientsListTable = () => {
             { label: "Personal ID", value: "personal_document_id" },
             { label: "E-mail", value: "email" },
           ]}
-          data={patientsData}
+          data={patientsData.response.patients}
           actions={{ link: "/patients" }}
         />
       </CardContainer>
@@ -68,7 +33,7 @@ const PatientsListTable = () => {
         color="secondary"
         activePage={activePage}
         itemsCountPerPage={5}
-        totalItemsCount={totalData}
+        totalItemsCount={patientsData.response.count}
         pageRangeDisplayed={5}
         handlePageChange={handlePageChange}
       />
