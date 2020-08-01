@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogoutAction } from "../../redux/authDuck";
 import "./styles.scss";
 
-const NavBar = () => {
+const NavBar = ({ handleClick, showMenu }) => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -12,23 +12,42 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="nav-bar">
-      <NavLink activeClassName="active-link" to="/" exact>
-        Dashboard
-      </NavLink>
-      <NavLink activeClassName="active-link" to="/appointments">
-        Apponintments
-      </NavLink>
-      <NavLink activeClassName="active-link" to="/patients">
-        Patients
-      </NavLink>
-      <NavLink activeClassName="active-link" to="/users">
-        Users
-      </NavLink>
-      <NavLink to="/" onClick={handleLogout}>
-        Logout
-      </NavLink>
-    </nav>
+    <Fragment>
+      <nav className={`nav-bar ${showMenu ? "open" : ""}`}>
+        <NavLink
+          activeClassName="active-link"
+          to="/"
+          exact
+          onClick={handleClick}
+        >
+          Dashboard
+        </NavLink>
+        <NavLink
+          activeClassName="active-link"
+          to="/appointments"
+          onClick={handleClick}
+        >
+          Apponintments
+        </NavLink>
+        <NavLink
+          activeClassName="active-link"
+          to="/patients"
+          onClick={handleClick}
+        >
+          Patients
+        </NavLink>
+        <NavLink
+          activeClassName="active-link"
+          to="/users"
+          onClick={handleClick}
+        >
+          Users
+        </NavLink>
+        <NavLink to="/" onClick={handleLogout}>
+          Logout
+        </NavLink>
+      </nav>
+    </Fragment>
   );
 };
 
