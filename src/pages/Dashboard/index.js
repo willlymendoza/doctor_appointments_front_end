@@ -79,7 +79,7 @@ const Dashboard = () => {
               ]}
               data={appointmentsList.response}
             />
-            <div className="table-grid table-content" style={{ marginTop: 50 }}>
+            <div className="table-grid" style={{ marginTop: 50 }}>
               <Link
                 className="button button-right bg-warning-color"
                 to="/appointments"
@@ -102,7 +102,7 @@ const Dashboard = () => {
             ]}
             data={recentPatients.response}
           />
-          <div className="table-grid table-content" style={{ marginTop: 50 }}>
+          <div className="table-grid" style={{ marginTop: 50 }}>
             <Link
               className="button button-right bg-secondary-color"
               to="/patients"
