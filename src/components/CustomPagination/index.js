@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Pagination from "react-js-pagination";
 
 import "./styles.scss";
@@ -32,3 +33,12 @@ const CustomPagination = ({
 };
 
 export default CustomPagination;
+
+CustomPagination.propTypes = {
+  activePage: PropTypes.number.isRequired,
+  itemsCountPerPage: PropTypes.number.isRequired,
+  totalItemsCount: PropTypes.number.isRequired,
+  pageRangeDisplayed: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
+  handlePageChange: PropTypes.func.isRequired,
+};
