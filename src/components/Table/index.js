@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import dateService from "../../services/dateService";
 
-const Table = ({ labels, data, actions, dateService }) => {
+const Table = ({ labels, data, actions }) => {
   return (
     <Fragment>
       <div className="table-grid table-header">
