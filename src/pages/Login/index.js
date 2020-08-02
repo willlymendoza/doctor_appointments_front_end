@@ -1,13 +1,13 @@
 import React, { Fragment, useState } from "react";
 import LoginForm from "./LoginForm";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "components/PageTitle";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setLoginAction } from "../../redux/authDuck";
-import { login } from "../../services/loginService";
+import { setLoginAction } from "redux/authDuck";
+import { login } from "services/loginService";
 import { joiResolver } from "@hookform/resolvers";
-import useLoginFormValidation from "../../hooks/useLoginFormValidation";
+import useLoginFormValidation from "hooks/useLoginFormValidation";
 
 const Login = () => {
   const formValidation = useLoginFormValidation();

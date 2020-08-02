@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import CardContainer from "../../../components/CardContainer";
+import CardContainer from "components/CardContainer";
 
 import "./styles.scss";
 
