@@ -3,24 +3,24 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-import ProtectedRoute from "./hoc/ProtectedRoute";
+import ProtectedRoute from "hoc/ProtectedRoute";
 
-import "./App.scss";
+import "App.scss";
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "components/Header";
+import Footer from "components/Footer";
 
-import Dashboard from "./pages/Dashboard";
-import Appointments from "./pages/Appointments";
-import Patients from "./pages/Patients";
-import PatientAdd from "./pages/Patients/PatientAdd";
-import PatientView from "./pages/Patients/PatientView";
-import Users from "./pages/Users";
-import Main from "./components/Main";
-import Login from "./pages/Login";
-import AppointmentAdd from "./pages/Appointments/AppointmentAdd";
-import AppointmentView from "./pages/Appointments/AppointmentView";
-import Error404 from "./components/Error404";
+import Dashboard from "pages/Dashboard";
+import Appointments from "pages/Appointments";
+import Patients from "pages/Patients";
+import PatientAdd from "pages/Patients/PatientAdd";
+import PatientView from "pages/Patients/PatientView";
+import Users from "pages/Users";
+import Main from "components/Main";
+import Login from "pages/Login";
+import AppointmentAdd from "pages/Appointments/AppointmentAdd";
+import AppointmentView from "pages/Appointments/AppointmentView";
+import Error404 from "components/Error404";
 
 function App() {
   return (
