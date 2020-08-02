@@ -59,7 +59,7 @@ function App() {
                   exact
                   component={PatientView}
                 />
-                <ProtectedRoute path="/users" exact component={Users} />
+
                 <Route path="/login" exact component={Login}></Route>
                 <Route path="*" component={Error404}></Route>
               </Switch>

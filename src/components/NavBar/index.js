@@ -37,13 +37,6 @@ const NavBar = ({ handleClick, showMenu }) => {
         >
           Patients
         </NavLink>
-        <NavLink
-          activeClassName="active-link"
-          to="/users"
-          onClick={handleClick}
-        >
-          Users
-        </NavLink>
         <NavLink to="/" onClick={handleLogout}>
           Logout
         </NavLink>
