@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-import CardContainer from "../../components/CardContainer";
-import CustomPagination from "../../components/CustomPagination";
+import CardContainer from "../../../components/CardContainer";
+import CustomPagination from "../../../components/CustomPagination";
 import { NavLink } from "react-router-dom";
-import Table from "../Table";
+import Table from "../../../components/Table";
 import "./styles.scss";
 
 const AppointmentsListTable = ({

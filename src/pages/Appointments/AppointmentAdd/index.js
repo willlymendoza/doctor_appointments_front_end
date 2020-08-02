@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import AppointmentAddForm from "../../../components/AppointmentAddForm";
+import AppointmentAddForm from "../AppointmentAdd/AppointmentAddForm";
 import PageTitle from "../../../components/PageTitle";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";

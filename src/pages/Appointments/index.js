@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import PageTitle from "../../components/PageTitle";
-import AppointmentsListTable from "../../components/AppointmentsListTable";
+import AppointmentList from "./AppointmentList";
 import { useSelector } from "react-redux";
 import useFetch from "../../hooks/useFetch";
 import PageLoading from "../../components/PageLoading";
@@ -24,7 +24,7 @@ const Appointments = () => {
       ) : (
         <Fragment>
           <PageTitle title="APPOINTMENTS" />
-          <AppointmentsListTable
+          <AppointmentList
             appointmentsData={appointmentsData}
             handlePageChange={handlePageChange}
             activePage={activePage}
