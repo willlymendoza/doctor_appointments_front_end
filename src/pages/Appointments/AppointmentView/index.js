@@ -79,9 +79,11 @@ const AppointmentView = (props) => {
         <Fragment>
           <PageTitle
             title={
-              dateService(appointmentInfo.response.appointment_date) +
-              " " +
-              appointmentInfo.response.hour
+              appointmentInfo.length
+                ? dateService(appointmentInfo.response.appointment_date) +
+                  " " +
+                  appointmentInfo.response.hour
+                : "Appointment info not found"
             }
           />
           <div className="appointment-info-container">
@@ -102,7 +104,7 @@ const AppointmentView = (props) => {
             />
 
             <AppointmentPatientInfo
-              patientInfo={appointmentInfo.response.patient}
+              patientInfo={appointmentInfo.response.patient || {}}
             />
           </div>
         </Fragment>

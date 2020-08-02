@@ -136,24 +136,28 @@ const AppointmentViewForm = ({
               </span>
             </div>
 
-            <div className="form-group button-container">
-              {!disabledInput ? (
-                <button
-                  type="submit"
-                  className="button button-right bg-warning-color"
-                >
-                  save changes
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  className="button button-right bg-warning-color"
-                  onClick={handleEditClick}
-                >
-                  edit
-                </button>
-              )}
-            </div>
+            {appointmentInfo.length ? (
+              <div className="form-group button-container">
+                {!disabledInput ? (
+                  <button
+                    type="submit"
+                    className="button button-right bg-warning-color"
+                  >
+                    save changes
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="button button-right bg-warning-color"
+                    onClick={handleEditClick}
+                  >
+                    edit
+                  </button>
+                )}
+              </div>
+            ) : (
+              ""
+            )}
           </form>
         ) : (
           <h3>Loading...</h3>
@@ -168,7 +172,7 @@ export default AppointmentViewForm;
 AppointmentViewForm.propTypes = {
   patientsList: PropTypes.array.isRequired,
   doctorsList: PropTypes.array.isRequired,
-  appointmentInfo: PropTypes.object.isRequired,
+  appointmentInfo: PropTypes.array.isRequired,
   onSubmitForm: PropTypes.func.isRequired,
   handleSelectChange: PropTypes.func.isRequired,
   handleEditClick: PropTypes.func.isRequired,
