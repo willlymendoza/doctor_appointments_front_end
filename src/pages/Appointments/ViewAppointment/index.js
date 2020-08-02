@@ -11,6 +11,7 @@ import useFetch from "../../../hooks/useFetch";
 import { update } from "../../../services/appointmentService";
 import "./styles.scss";
 import PageLoading from "../../../components/PageLoading";
+import dateService from "../../../services/dateService";
 
 const ViewAppointment = (props) => {
   const { id } = useParams();
@@ -78,7 +79,7 @@ const ViewAppointment = (props) => {
         <Fragment>
           <PageTitle
             title={
-              appointmentInfo.response.appointment_date +
+              dateService(appointmentInfo.response.appointment_date) +
               " " +
               appointmentInfo.response.hour
             }
