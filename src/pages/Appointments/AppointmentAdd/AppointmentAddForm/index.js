@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import CardContainer from "../../../../components/CardContainer";
 import Select from "react-select";
 
@@ -108,3 +109,15 @@ const AppointmentAddForm = ({
 };
 
 export default AppointmentAddForm;
+
+AppointmentAddForm.propTypes = {
+  onSubmitForm: PropTypes.func.isRequired,
+  handleSelectChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  patientsList: PropTypes.array.isRequired,
+  doctorsList: PropTypes.array.isRequired,
+  register: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  control: PropTypes.object.isRequired,
+  Controller: PropTypes.func.isRequired,
+};
