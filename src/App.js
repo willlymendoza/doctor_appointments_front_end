@@ -18,8 +18,8 @@ import ViewPatient from "./pages/Patients/ViewPatient";
 import Users from "./pages/Users";
 import Main from "./components/Main";
 import Login from "./pages/Login";
-import AddAppointment from "./pages/Appointments/AddAppointment";
-import ViewAppointment from "./pages/Appointments/ViewAppointment";
+import AppointmentAdd from "./pages/Appointments/AppointmentAdd";
+import AppointmentView from "./pages/Appointments/AppointmentView";
 import Error404 from "./components/Error404";
 
 function App() {
@@ -41,12 +41,12 @@ function App() {
                 <ProtectedRoute
                   path="/appointments/add"
                   exact
-                  component={AddAppointment}
+                  component={AppointmentAdd}
                 />
                 <ProtectedRoute
                   path="/appointments/:id"
                   exact
-                  component={ViewAppointment}
+                  component={AppointmentView}
                 />
                 <ProtectedRoute path="/patients" exact component={Patients} />
                 <ProtectedRoute
