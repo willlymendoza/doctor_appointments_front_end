@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import CardContainer from "../../../components/CardContainer";
 import CustomPagination from "../../../components/CustomPagination";
 import { NavLink } from "react-router-dom";
@@ -56,3 +57,9 @@ const AppointmentList = ({
 };
 
 export default AppointmentList;
+
+AppointmentList.propTypes = {
+  appointmentsData: PropTypes.object.isRequired,
+  handlePageChange: PropTypes.func.isRequired,
+  activePage: PropTypes.number.isRequired,
+};
