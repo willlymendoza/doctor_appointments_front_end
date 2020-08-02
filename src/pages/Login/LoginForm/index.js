@@ -18,14 +18,25 @@ const LoginForm = ({
           <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
             <div className="form-group full-width">
               <label>E-mail</label>
-              <input type="text" name="email" autoFocus ref={register} />
+              <input
+                type="text"
+                name="email"
+                autoFocus
+                defaultValue="demouser@doctorappointments.com"
+                ref={register}
+              />
               <span className="form-error-message">
                 {errors?.email?.message}
               </span>
             </div>
             <div className="form-group full-width">
               <label>Password</label>
-              <input type="password" name="password" ref={register} />
+              <input
+                type="password"
+                name="password"
+                defaultValue="12345678"
+                ref={register}
+              />
               <span className="form-error-message">
                 {errors?.password?.message}
               </span>
