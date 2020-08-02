@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./styles.scss";
 import CardContainer from "../../../components/CardContainer";
+import dateService from "../../../services/dateService";
 
 const AppointmentsList = ({ appointmentsInfo }) => {
   return (
@@ -9,7 +10,7 @@ const AppointmentsList = ({ appointmentsInfo }) => {
       <div className="list-container">
         {appointmentsInfo.map((item) => (
           <div key={item._id}>
-            <span>{item.appointment_date}</span>
+            <span>{dateService(item.appointment_date)}</span>
             <span>{item.hour}</span>
             <span>
               <Link to={`/appointments/${item._id}`}>
