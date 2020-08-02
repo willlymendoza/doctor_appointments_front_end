@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogoutAction } from "../../redux/authDuck";
@@ -52,3 +53,8 @@ const NavBar = ({ handleClick, showMenu }) => {
 };
 
 export default NavBar;
+
+NavBar.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  showMenu: PropTypes.bool.isRequired,
+};
