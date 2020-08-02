@@ -15,7 +15,6 @@ import Appointments from "pages/Appointments";
 import Patients from "pages/Patients";
 import PatientAdd from "pages/Patients/PatientAdd";
 import PatientView from "pages/Patients/PatientView";
-import Users from "pages/Users";
 import Main from "components/Main";
 import Login from "pages/Login";
 import AppointmentAdd from "pages/Appointments/AppointmentAdd";
