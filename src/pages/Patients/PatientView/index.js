@@ -12,7 +12,7 @@ import { update } from "../../../services/patientService";
 import "./styles.scss";
 import PageLoading from "../../../components/PageLoading";
 
-const ViewPatient = () => {
+const PatientView = () => {
   const { id } = useParams();
   const userToken = useSelector((store) => store.authData.userToken);
   const patientInfo = useFetch({
@@ -86,4 +86,4 @@ const ViewPatient = () => {
   );
 };
 
-export default ViewPatient;
+export default PatientView;

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import Table from "../Table";
 import "./styles.scss";
 
-const PatientsListTable = ({ patientsData, handlePageChange, activePage }) => {
+const PatientList = ({ patientsData, handlePageChange, activePage }) => {
   return (
     <Fragment>
       <NavLink to="/patients/add">
@@ -41,4 +41,4 @@ const PatientsListTable = ({ patientsData, handlePageChange, activePage }) => {
   );
 };
 
-export default PatientsListTable;
+export default PatientList;

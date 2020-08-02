@@ -8,7 +8,7 @@ import { joiResolver } from "@hookform/resolvers";
 import usePatientFormValidation from "../../../hooks/usePatientFormValidation";
 import { postNew } from "../../../services/patientService";
 
-const AddPatient = () => {
+const PatientAdd = () => {
   const formValidation = usePatientFormValidation();
   const [requestError, setRequestError] = useState(null);
   const userToken = useSelector((store) => store.authData.userToken);
@@ -46,4 +46,4 @@ const AddPatient = () => {
   );
 };
 
-export default AddPatient;
+export default PatientAdd;

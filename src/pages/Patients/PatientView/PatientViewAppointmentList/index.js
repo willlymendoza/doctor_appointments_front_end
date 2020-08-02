@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./styles.scss";
-import CardContainer from "../../../components/CardContainer";
-import dateService from "../../../services/dateService";
+import CardContainer from "../../../../components/CardContainer";
+import dateService from "../../../../services/dateService";
 
-const AppointmentsList = ({ appointmentsInfo }) => {
+const PatientViewAppointmentList = ({ appointmentsInfo }) => {
   return (
     <CardContainer title="Appointments" color="warning_color">
       <div className="list-container">
@@ -24,4 +24,4 @@ const AppointmentsList = ({ appointmentsInfo }) => {
   );
 };
 
-export default AppointmentsList;
+export default PatientViewAppointmentList;
