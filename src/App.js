@@ -13,8 +13,8 @@ import Footer from "./components/Footer";
 import Dashboard from "./pages/Dashboard";
 import Appointments from "./pages/Appointments";
 import Patients from "./pages/Patients";
-import AddPatient from "./pages/Patients/AddPatient";
-import ViewPatient from "./pages/Patients/ViewPatient";
+import PatientAdd from "./pages/Patients/PatientAdd";
+import PatientView from "./pages/Patients/PatientView";
 import Users from "./pages/Users";
 import Main from "./components/Main";
 import Login from "./pages/Login";
@@ -52,12 +52,12 @@ function App() {
                 <ProtectedRoute
                   path="/patients/add"
                   exact
-                  component={AddPatient}
+                  component={PatientAdd}
                 />
                 <ProtectedRoute
                   path="/patients/:id"
                   exact
-                  component={ViewPatient}
+                  component={PatientView}
                 />
                 <ProtectedRoute path="/users" exact component={Users} />
                 <Route path="/login" exact component={Login}></Route>
