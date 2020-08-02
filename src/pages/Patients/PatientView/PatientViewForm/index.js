@@ -125,24 +125,28 @@ const PatientViewForm = ({
             ""
           )}
 
-          <div className="form-group button-container">
-            {!disabledInput ? (
-              <button
-                type="submit"
-                className="button button-right bg-secondary-color"
-              >
-                save changes
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="button button-right bg-secondary-color"
-                onClick={handleEditClick}
-              >
-                edit
-              </button>
-            )}
-          </div>
+          {patientInfo.length ? (
+            <div className="form-group button-container">
+              {!disabledInput ? (
+                <button
+                  type="submit"
+                  className="button button-right bg-secondary-color"
+                >
+                  save changes
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="button button-right bg-secondary-color"
+                  onClick={handleEditClick}
+                >
+                  edit
+                </button>
+              )}
+            </div>
+          ) : (
+            ""
+          )}
         </form>
       </CardContainer>
     </div>
@@ -152,7 +156,7 @@ const PatientViewForm = ({
 export default PatientViewForm;
 
 PatientViewForm.propTypes = {
-  patientInfo: PropTypes.object.isRequired,
+  patientInfo: PropTypes.array.isRequired,
   onSubmitForm: PropTypes.func.isRequired,
   disabledInput: PropTypes.bool.isRequired,
   handleEditClick: PropTypes.func.isRequired,

@@ -12,7 +12,7 @@ import { update } from "services/patientService";
 import "./styles.scss";
 import PageLoading from "components/PageLoading";
 
-const PatientView = () => {
+const PatientView = (props) => {
   const { id } = useParams();
   const userToken = useSelector((store) => store.authData.userToken);
   const patientInfo = useFetch({
@@ -59,14 +59,16 @@ const PatientView = () => {
         <Fragment>
           <PageTitle
             title={
-              patientInfo.response.first_name +
-              " " +
-              patientInfo.response.last_name
+              patientInfo.length
+                ? patientInfo.response.first_name +
+                  " " +
+                  patientInfo.response.last_name
+                : "Patient info not found"
             }
           />
           <div className="patient-info-container">
             <PatientViewForm
-              patientInfo={patientInfo.response}
+              patientInfo={patientInfo.response || []}
               onSubmitForm={onSubmitForm}
               requestError={requestError}
               disabledInput={disabledInput}
