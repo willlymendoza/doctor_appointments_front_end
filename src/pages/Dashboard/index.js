@@ -43,17 +43,17 @@ const Dashboard = () => {
             <DashBoardCard
               title="Patients"
               color="secondary_color"
-              quantity={parseInt(totalPatients.response.total)}
+              quantity={parseInt(totalPatients.response.total) || 0}
             />
             <DashBoardCard
               title="Appointments"
               color="info_color"
-              quantity={parseInt(totalAppointments.response.total)}
+              quantity={parseInt(totalAppointments.response.total) || 0}
             />
             <DashBoardCard
               title="Today's Appointments"
               color="warning_color"
-              quantity={parseInt(todayAppointments.response.total)}
+              quantity={parseInt(todayAppointments.response.total) || 0}
             />
           </div>
 
