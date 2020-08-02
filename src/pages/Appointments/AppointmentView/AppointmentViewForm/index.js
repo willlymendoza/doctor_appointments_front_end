@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import CardContainer from "../../../../components/CardContainer";
+import CardContainer from "components/CardContainer";
 import Select from "react-select";
 import moment from "moment";
 

@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from "react";
-import PageTitle from "../../components/PageTitle";
+import PageTitle from "components/PageTitle";
 import AppointmentList from "./AppointmentList";
 import { useSelector } from "react-redux";
-import useFetch from "../../hooks/useFetch";
-import PageLoading from "../../components/PageLoading";
+import useFetch from "hooks/useFetch";
+import PageLoading from "components/PageLoading";
 
 const Appointments = () => {
   const [activePage, setActivePage] = useState(1);

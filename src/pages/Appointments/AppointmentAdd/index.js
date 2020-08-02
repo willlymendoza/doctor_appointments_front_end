@@ -1,14 +1,14 @@
 import React, { Fragment, useState } from "react";
 import AppointmentAddForm from "../AppointmentAdd/AppointmentAddForm";
-import PageTitle from "../../../components/PageTitle";
+import PageTitle from "components/PageTitle";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers";
-import useAppointmentFormValidation from "../../../hooks/useAppointmentFormValidation";
-import { postNew } from "../../../services/appointmentService";
-import useFetch from "../../../hooks/useFetch";
-import PageLoading from "../../../components/PageLoading";
+import useAppointmentFormValidation from "hooks/useAppointmentFormValidation";
+import { postNew } from "services/appointmentService";
+import useFetch from "hooks/useFetch";
+import PageLoading from "components/PageLoading";
 
 const AppointmentAdd = () => {
   const formValidation = useAppointmentFormValidation();

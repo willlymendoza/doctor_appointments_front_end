@@ -1,17 +1,17 @@
 import React, { Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
-import PageTitle from "../../../components/PageTitle";
+import PageTitle from "components/PageTitle";
 import AppointmentViewForm from "../AppointmentView/AppointmentViewForm";
 import AppointmentPatientInfo from "../AppointmentView/AppointmentViewPatientInfo";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers";
-import useAppointmentFormValidation from "../../../hooks/useAppointmentFormValidation";
-import useFetch from "../../../hooks/useFetch";
-import { update } from "../../../services/appointmentService";
+import useAppointmentFormValidation from "hooks/useAppointmentFormValidation";
+import useFetch from "hooks/useFetch";
+import { update } from "services/appointmentService";
 import "./styles.scss";
-import PageLoading from "../../../components/PageLoading";
-import dateService from "../../../services/dateService";
+import PageLoading from "components/PageLoading";
+import dateService from "services/dateService";
 
 const AppointmentView = (props) => {
   const { id } = useParams();
