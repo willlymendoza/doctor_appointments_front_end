@@ -14,7 +14,9 @@ const Table = ({ labels, data, actions }) => {
         {actions ? <label>Actions</label> : ""}
       </div>
 
-      {data && <div className="table-grid full-width">No records found</div>}
+      {(!data || !data.length) && (
+        <div className="table-grid full-width">No records found</div>
+      )}
 
       {data.map((item) => (
         <div key={item._id} className="table-grid table-content">
