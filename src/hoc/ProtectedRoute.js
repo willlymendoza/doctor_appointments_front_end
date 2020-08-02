@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -31,3 +32,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 };
 
 export default ProtectedRoute;
+
+ProtectedRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+};
