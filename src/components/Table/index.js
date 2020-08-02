@@ -91,5 +91,5 @@ export default Table;
 Table.propTypes = {
   labels: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired,
+  actions: PropTypes.object,
 };
