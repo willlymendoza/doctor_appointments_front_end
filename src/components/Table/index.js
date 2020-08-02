@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-const Table = ({ labels, data, actions }) => {
+const Table = ({ labels, data, actions, dateService }) => {
   return (
     <Fragment>
       <div className="table-grid table-header">
@@ -24,13 +24,19 @@ const Table = ({ labels, data, actions }) => {
                       <span>
                         {label.child.map((child, i) => (
                           <Fragment key={i}>
-                            {item[label.value][child]}{" "}
+                            {label.type === "date"
+                              ? dateService(item[label.value][child]) + " "
+                              : item[label.value][child]}
                           </Fragment>
                         ))}
                       </span>
                     </Fragment>
                   ) : (
-                    <span key={index}>{item[label.value][label.child]}</span>
+                    <span key={index}>
+                      {label.type === "date"
+                        ? dateService(item[label.value][label.child])
+                        : item[label.value][label.child]}
+                    </span>
                   )}
                 </Fragment>
               ) : (
@@ -39,12 +45,20 @@ const Table = ({ labels, data, actions }) => {
                     <Fragment>
                       <span>
                         {label.value.map((value, ix) => (
-                          <Fragment key={ix}>{item[value]} </Fragment>
+                          <Fragment key={ix}>
+                            {label.type === "date"
+                              ? dateService(item[value])
+                              : item[value]}
+                          </Fragment>
                         ))}
                       </span>
                     </Fragment>
                   ) : (
-                    <span key={index}>{item[label.value]}</span>
+                    <span key={index}>
+                      {label.type === "date"
+                        ? dateService(item[label.value])
+                        : item[label.value]}
+                    </span>
                   )}
                 </Fragment>
               )}
