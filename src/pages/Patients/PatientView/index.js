@@ -24,7 +24,7 @@ const PatientView = () => {
     userToken,
   });
   const [disabledInput, setDisabledInput] = useState(true);
-  const [requestError, setRequestError] = useState(null);
+  const [requestError, setRequestError] = useState("");
   const formValidation = usePatientFormValidation();
 
   const { register, handleSubmit, errors } = useForm({
