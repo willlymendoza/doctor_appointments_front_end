@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import Table from "../../../components/Table";
 import "./styles.scss";
 
-const AppointmentsListTable = ({
+const AppointmentList = ({
   appointmentsData,
   handlePageChange,
   activePage,
@@ -55,4 +55,4 @@ const AppointmentsListTable = ({
   );
 };
 
-export default AppointmentsListTable;
+export default AppointmentList;

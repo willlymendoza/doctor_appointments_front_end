@@ -2,7 +2,7 @@ import React from "react";
 import CardContainer from "../../../../components/CardContainer";
 import Select from "react-select";
 
-const AppointmentForm = ({
+const AppointmentAddForm = ({
   onSubmitForm,
   handleSelectChange,
   patientsList,
@@ -107,4 +107,4 @@ const AppointmentForm = ({
   );
 };
 
-export default AppointmentForm;
+export default AppointmentAddForm;

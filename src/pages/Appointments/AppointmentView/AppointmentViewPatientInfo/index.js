@@ -2,7 +2,7 @@ import React from "react";
 import CardContainer from "../../../../components/CardContainer";
 import "./styles.scss";
 
-const AppointmentPatientInfo = ({ patientInfo }) => {
+const AppointmentViewPatientInfo = ({ patientInfo }) => {
   return (
     <CardContainer title="Patient Info" color="secondary_color">
       <div className="patient-info">
@@ -45,4 +45,4 @@ const AppointmentPatientInfo = ({ patientInfo }) => {
   );
 };
 
-export default AppointmentPatientInfo;
+export default AppointmentViewPatientInfo;

@@ -10,7 +10,7 @@ import { postNew } from "../../../services/appointmentService";
 import useFetch from "../../../hooks/useFetch";
 import PageLoading from "../../../components/PageLoading";
 
-const AddAppointment = () => {
+const AppointmentAdd = () => {
   const formValidation = useAppointmentFormValidation();
   const { register, handleSubmit, errors, control, setValue } = useForm({
     resolver: joiResolver(formValidation),
@@ -81,4 +81,4 @@ const AddAppointment = () => {
   );
 };
 
-export default AddAppointment;
+export default AppointmentAdd;
