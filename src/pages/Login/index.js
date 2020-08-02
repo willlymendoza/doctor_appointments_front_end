@@ -11,7 +11,7 @@ import useLoginFormValidation from "../../hooks/useLoginFormValidation";
 
 const Login = () => {
   const formValidation = useLoginFormValidation();
-  const [requestError, setRequestError] = useState(null);
+  const [requestError, setRequestError] = useState("");
 
   const { register, handleSubmit, errors } = useForm({
     resolver: joiResolver(formValidation),
