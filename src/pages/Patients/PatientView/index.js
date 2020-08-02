@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
 import PageTitle from "../../../components/PageTitle";
-import PatientViewForm from "../../../components/PatientViewForm";
+import PatientViewForm from "../../Patients/PatientView/PatientViewForm";
 import { useSelector } from "react-redux";
-import PatientAppointmentsList from "../PatientAppointmentsList";
+import PatientViewAppointmentList from "../PatientView/PatientViewAppointmentList";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers";
 import usePatientFormValidation from "../../../hooks/usePatientFormValidation";
@@ -76,7 +76,7 @@ const PatientView = () => {
               errors={errors}
             />
 
-            <PatientAppointmentsList
+            <PatientViewAppointmentList
               appointmentsInfo={appointmentsInfo.response}
             />
           </div>

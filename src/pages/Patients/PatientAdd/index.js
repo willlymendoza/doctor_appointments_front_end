@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import PageTitle from "../../../components/PageTitle";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import PatientAddForm from "../../../components/PatientAddForm";
+import PatientAddForm from "../../Patients/PatientAdd/PatientAddForm";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers";
 import usePatientFormValidation from "../../../hooks/usePatientFormValidation";

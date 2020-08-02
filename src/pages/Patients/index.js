@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import PageTitle from "../../components/PageTitle";
-import PatientsListTable from "../../components/PatientsListTable";
+import PatientList from "../Patients/PatientList";
 import { useSelector } from "react-redux";
 import useFetch from "../../hooks/useFetch";
 import PageLoading from "../../components/PageLoading";
@@ -24,7 +24,7 @@ const Patients = () => {
       ) : (
         <Fragment>
           <PageTitle title="PATIENTS" />
-          <PatientsListTable
+          <PatientList
             patientsData={patientsData}
             handlePageChange={handlePageChange}
             activePage={activePage}
