@@ -24,7 +24,7 @@ const AppointmentsListTable = ({
       <CardContainer title="List Of Appointments" color="warning_color">
         <Table
           labels={[
-            { label: "Date", value: "appointment_date" },
+            { label: "Date", value: "appointment_date", type: "date" },
             { label: "Hour", value: "hour" },
             {
               label: "Patient",
