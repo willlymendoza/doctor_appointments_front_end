@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
 import PageTitle from "../../../components/PageTitle";
 import AppointmentViewForm from "../../../components/AppointmentViewForm";
-import AppointmentPatientInfo from "../AppointmentPatientInfo";
+import AppointmentPatientInfo from "../ViewAppointment/AppointmentPatientInfo";
 import { useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers";
