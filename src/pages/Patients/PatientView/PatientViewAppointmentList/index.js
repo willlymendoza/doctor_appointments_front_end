@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./styles.scss";
-import CardContainer from "../../../../components/CardContainer";
-import dateService from "../../../../services/dateService";
+import CardContainer from "components/CardContainer";
+import dateService from "services/dateService";
 
 const PatientViewAppointmentList = ({ appointmentsInfo }) => {
   return (

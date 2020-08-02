@@ -1,12 +1,12 @@
 import React, { Fragment, useState } from "react";
-import PageTitle from "../../../components/PageTitle";
+import PageTitle from "components/PageTitle";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import PatientAddForm from "../../Patients/PatientAdd/PatientAddForm";
+import PatientAddForm from "./PatientAddForm";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers";
-import usePatientFormValidation from "../../../hooks/usePatientFormValidation";
-import { postNew } from "../../../services/patientService";
+import usePatientFormValidation from "hooks/usePatientFormValidation";
+import { postNew } from "services/patientService";
 
 const PatientAdd = () => {
   const formValidation = usePatientFormValidation();

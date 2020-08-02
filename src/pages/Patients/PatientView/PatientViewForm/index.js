@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CardContainer from "../../../../components/CardContainer";
+import CardContainer from "components/CardContainer";
 
 const PatientViewForm = ({
   patientInfo,

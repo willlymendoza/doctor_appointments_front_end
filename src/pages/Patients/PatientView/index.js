@@ -1,16 +1,16 @@
 import React, { Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
-import PageTitle from "../../../components/PageTitle";
-import PatientViewForm from "../../Patients/PatientView/PatientViewForm";
+import PageTitle from "components/PageTitle";
+import PatientViewForm from "./PatientViewForm";
 import { useSelector } from "react-redux";
 import PatientViewAppointmentList from "../PatientView/PatientViewAppointmentList";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers";
-import usePatientFormValidation from "../../../hooks/usePatientFormValidation";
-import useFetch from "../../../hooks/useFetch";
-import { update } from "../../../services/patientService";
+import usePatientFormValidation from "hooks/usePatientFormValidation";
+import useFetch from "hooks/useFetch";
+import { update } from "services/patientService";
 import "./styles.scss";
-import PageLoading from "../../../components/PageLoading";
+import PageLoading from "components/PageLoading";
 
 const PatientView = () => {
   const { id } = useParams();
