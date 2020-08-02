@@ -7,7 +7,7 @@ const useFetch = ({ url, method, userToken }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    let didCancel = false;
+    let didCancel = true;
 
     const getData = async () => {
       setIsLoading(true);
@@ -16,17 +16,18 @@ const useFetch = ({ url, method, userToken }) => {
           method: "GET",
           url,
         });
-        if (!didCancel) setResponse(result.data);
+        if (didCancel) setResponse(result.data);
       } catch (error) {
-        if (!didCancel) setError(error);
+        if (didCancel) setError(error);
+      } finally {
+        if (didCancel) setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     getData();
 
     return () => {
-      didCancel = true;
+      didCancel = false;
     };
   }, [method, url, userToken]);
 
