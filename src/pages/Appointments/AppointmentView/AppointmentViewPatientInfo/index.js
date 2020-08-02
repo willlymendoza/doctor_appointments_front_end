@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import CardContainer from "../../../../components/CardContainer";
 import "./styles.scss";
 
@@ -46,3 +47,7 @@ const AppointmentViewPatientInfo = ({ patientInfo }) => {
 };
 
 export default AppointmentViewPatientInfo;
+
+AppointmentViewPatientInfo.propTypes = {
+  patientInfo: PropTypes.object.isRequired,
+};
