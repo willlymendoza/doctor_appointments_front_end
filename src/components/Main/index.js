@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import "./styles.scss";
 
 const Main = ({ children }) => {
@@ -12,3 +13,7 @@ const Main = ({ children }) => {
 };
 
 export default Main;
+
+Main.propTypes = {
+  children: PropTypes.element.isRequired,
+};
