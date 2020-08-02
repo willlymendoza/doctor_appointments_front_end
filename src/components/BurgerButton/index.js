@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./styles.scss";
 
 const BurgerButton = ({ handleClick, showMenu }) => {
@@ -10,3 +11,8 @@ const BurgerButton = ({ handleClick, showMenu }) => {
 };
 
 export default BurgerButton;
+
+BurgerButton.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  showMenu: PropTypes.bool.isRequired,
+};
