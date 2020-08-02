@@ -59,7 +59,7 @@ const PatientView = (props) => {
         <Fragment>
           <PageTitle
             title={
-              patientInfo.length
+              patientInfo.response.first_name
                 ? patientInfo.response.first_name +
                   " " +
                   patientInfo.response.last_name
@@ -68,7 +68,7 @@ const PatientView = (props) => {
           />
           <div className="patient-info-container">
             <PatientViewForm
-              patientInfo={patientInfo.response || []}
+              patientInfo={patientInfo}
               onSubmitForm={onSubmitForm}
               requestError={requestError}
               disabledInput={disabledInput}

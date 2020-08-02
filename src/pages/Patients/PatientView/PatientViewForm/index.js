@@ -21,7 +21,7 @@ const PatientViewForm = ({
             <input
               name="first_name"
               disabled={disabledInput}
-              defaultValue={patientInfo.first_name}
+              defaultValue={patientInfo.response.first_name}
               ref={register}
             />
             <span className="form-error-message">
@@ -33,7 +33,7 @@ const PatientViewForm = ({
             <input
               name="last_name"
               disabled={disabledInput}
-              defaultValue={patientInfo.last_name}
+              defaultValue={patientInfo.response.last_name}
               ref={register}
             />
             <span className="form-error-message">
@@ -45,7 +45,7 @@ const PatientViewForm = ({
             <input
               name="personal_document_id"
               disabled={disabledInput}
-              defaultValue={patientInfo.personal_document_id}
+              defaultValue={patientInfo.response.personal_document_id}
               ref={register}
             />
             <span className="form-error-message">
@@ -57,7 +57,7 @@ const PatientViewForm = ({
             <input
               name="phone_number"
               disabled={disabledInput}
-              defaultValue={patientInfo.phone_number}
+              defaultValue={patientInfo.response.phone_number}
               ref={register}
             />
             <span className="form-error-message">
@@ -69,7 +69,7 @@ const PatientViewForm = ({
             <input
               name="email"
               disabled={disabledInput}
-              defaultValue={patientInfo.email}
+              defaultValue={patientInfo.response.email}
               ref={register}
             />
             <span className="form-error-message">{errors?.email?.message}</span>
@@ -79,7 +79,7 @@ const PatientViewForm = ({
             <input
               name="city"
               disabled={disabledInput}
-              defaultValue={patientInfo.city}
+              defaultValue={patientInfo.response.city}
               ref={register}
             />
             <span className="form-error-message">{errors?.city?.message}</span>
@@ -89,7 +89,7 @@ const PatientViewForm = ({
             <input
               name="address"
               disabled={disabledInput}
-              defaultValue={patientInfo.address}
+              defaultValue={patientInfo.response.address}
               ref={register}
             />
             <span className="form-error-message">
@@ -101,7 +101,7 @@ const PatientViewForm = ({
             <input
               name="age"
               disabled={disabledInput}
-              defaultValue={patientInfo.age}
+              defaultValue={patientInfo.response.age}
               ref={register}
             />
             <span className="form-error-message">{errors?.age?.message}</span>
@@ -111,7 +111,7 @@ const PatientViewForm = ({
             <input
               name="sex"
               disabled={disabledInput}
-              defaultValue={patientInfo.sex}
+              defaultValue={patientInfo.response.sex}
               ref={register}
             />
             <span className="form-error-message">{errors?.sex?.message}</span>
@@ -125,7 +125,7 @@ const PatientViewForm = ({
             ""
           )}
 
-          {patientInfo.length ? (
+          {patientInfo.response.first_name ? (
             <div className="form-group button-container">
               {!disabledInput ? (
                 <button
@@ -156,7 +156,7 @@ const PatientViewForm = ({
 export default PatientViewForm;
 
 PatientViewForm.propTypes = {
-  patientInfo: PropTypes.array.isRequired,
+  patientInfo: PropTypes.object.isRequired,
   onSubmitForm: PropTypes.func.isRequired,
   disabledInput: PropTypes.bool.isRequired,
   handleEditClick: PropTypes.func.isRequired,
