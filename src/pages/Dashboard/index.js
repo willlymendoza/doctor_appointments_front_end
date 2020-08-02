@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Table from "../../components/Table";
 import useFetch from "../../hooks/useFetch";
+import dateService from "../../services/dateService";
 
 const Dashboard = () => {
   const userToken = useSelector((store) => store.authData.userToken);
@@ -64,7 +65,7 @@ const Dashboard = () => {
             >
               <Table
                 labels={[
-                  { label: "Date", value: "appointment_date" },
+                  { label: "Date", value: "appointment_date", type: "date" },
                   { label: "Hour", value: ["hour"] },
                   {
                     label: "Patient",
@@ -80,6 +81,7 @@ const Dashboard = () => {
                   },
                 ]}
                 data={appointmentsList.response}
+                dateService={dateService}
               />
               <div className="table-grid" style={{ marginTop: 50 }}>
                 <Link
@@ -99,9 +101,14 @@ const Dashboard = () => {
                 labels={[
                   { label: "Patient", value: ["first_name", "last_name"] },
                   { label: "E-mail", value: "email" },
-                  { label: "Registered Date", value: "created_at" },
+                  {
+                    label: "Registered Date",
+                    value: "created_at",
+                    type: "date",
+                  },
                 ]}
                 data={recentPatients.response}
+                dateService={dateService}
               />
               <div className="table-grid" style={{ marginTop: 50 }}>
                 <Link
