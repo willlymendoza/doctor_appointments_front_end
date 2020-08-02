@@ -10,7 +10,7 @@ import { postNew } from "../../../services/patientService";
 
 const PatientAdd = () => {
   const formValidation = usePatientFormValidation();
-  const [requestError, setRequestError] = useState(null);
+  const [requestError, setRequestError] = useState("");
   const userToken = useSelector((store) => store.authData.userToken);
   const { register, handleSubmit, errors } = useForm({
     resolver: joiResolver(formValidation),
