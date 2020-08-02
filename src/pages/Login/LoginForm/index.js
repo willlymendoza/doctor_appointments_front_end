@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import CardContainer from "../../../components/CardContainer";
 
 import "./styles.scss";
@@ -51,3 +52,11 @@ const LoginForm = ({
 };
 
 export default LoginForm;
+
+LoginForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  onSubmitForm: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  requestError: PropTypes.string.isRequired,
+};
