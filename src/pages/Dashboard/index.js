@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
-import CardContainer from "../../components/CardContainer";
-import DashBoardCard from "../../components/DashBoardCard";
-import PageTitle from "../../components/PageTitle";
-import PageLoading from "../../components/PageLoading";
+import CardContainer from "components/CardContainer";
+import DashBoardCard from "components/DashBoardCard";
+import PageTitle from "components/PageTitle";
+import PageLoading from "components/PageLoading";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Table from "../../components/Table";
-import useFetch from "../../hooks/useFetch";
+import Table from "components/Table";
+import useFetch from "hooks/useFetch";
 
 const Dashboard = () => {
   const userToken = useSelector((store) => store.authData.userToken);
