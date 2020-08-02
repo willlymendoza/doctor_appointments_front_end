@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import CardContainer from "../../../../components/CardContainer";
 
 const PatientViewForm = ({
@@ -149,3 +150,14 @@ const PatientViewForm = ({
 };
 
 export default PatientViewForm;
+
+PatientViewForm.propTypes = {
+  patientInfo: PropTypes.object.isRequired,
+  onSubmitForm: PropTypes.func.isRequired,
+  disabledInput: PropTypes.bool.isRequired,
+  handleEditClick: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  requestError: PropTypes.string.isRequired,
+};
