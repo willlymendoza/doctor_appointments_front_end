@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import CardContainer from "../../../../components/CardContainer";
 import Select from "react-select";
 import moment from "moment";
@@ -163,3 +164,19 @@ const AppointmentViewForm = ({
 };
 
 export default AppointmentViewForm;
+
+AppointmentViewForm.propTypes = {
+  patientsList: PropTypes.array.isRequired,
+  doctorsList: PropTypes.array.isRequired,
+  appointmentInfo: PropTypes.object.isRequired,
+  onSubmitForm: PropTypes.func.isRequired,
+  handleSelectChange: PropTypes.func.isRequired,
+  handleEditClick: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  disabledInput: PropTypes.bool.isRequired,
+  errors: PropTypes.object.isRequired,
+  control: PropTypes.object.isRequired,
+  Controller: PropTypes.func.isRequired,
+  setValue: PropTypes.func.isRequired,
+};
