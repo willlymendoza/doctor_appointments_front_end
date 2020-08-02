@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import dateService from "../../services/dateService";
 
@@ -84,3 +85,9 @@ const Table = ({ labels, data, actions }) => {
 };
 
 export default Table;
+
+Table.propTypes = {
+  labels: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired,
+};
