@@ -79,7 +79,7 @@ const AppointmentView = (props) => {
         <Fragment>
           <PageTitle
             title={
-              appointmentInfo.length
+              appointmentInfo.response.doctor_id
                 ? dateService(appointmentInfo.response.appointment_date) +
                   " " +
                   appointmentInfo.response.hour
@@ -88,7 +88,7 @@ const AppointmentView = (props) => {
           />
           <div className="appointment-info-container">
             <AppointmentViewForm
-              appointmentInfo={appointmentInfo.response}
+              appointmentInfo={appointmentInfo}
               onSubmitForm={onSubmitForm}
               patientsList={patientsList.response}
               doctorsList={doctorsList.response}
