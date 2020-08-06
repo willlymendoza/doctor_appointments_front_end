@@ -28,7 +28,7 @@ const NavBar = ({ handleClick, showMenu }) => {
           to="/appointments"
           onClick={handleClick}
         >
-          Apponintments
+          Appointments
         </NavLink>
         <NavLink
           activeClassName="active-link"
