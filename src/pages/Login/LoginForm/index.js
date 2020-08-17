@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import CardContainer from "components/CardContainer";
+import { useTranslation } from "react-i18next";
 
 import "./styles.scss";
 
@@ -11,6 +12,7 @@ const LoginForm = ({
   errors,
   requestError,
 }) => {
+  const { t } = useTranslation();
   return (
     <Fragment>
       <div className="form-container login-container">
@@ -30,7 +32,7 @@ const LoginForm = ({
               </span>
             </div>
             <div className="form-group full-width">
-              <label>Password</label>
+              <label>{t("password.label")}</label>
               <input
                 type="password"
                 name="password"
