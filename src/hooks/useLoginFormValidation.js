@@ -1,14 +1,23 @@
 import Joi from "@hapi/joi";
+import { useTranslation } from "react-i18next";
 
-const useLoginFormValidation = () =>
-  Joi.object({
-    email: Joi.string().email({ tlds: false }).required().messages({
-      "string.email": `"Email" must be a valid email`,
-      "string.empty": `"Email" is required`,
-    }),
-    password: Joi.string().trim().required().messages({
-      "string.empty": `"Password" is required`,
-    }),
+const useLoginFormValidation = () => {
+  const { t } = useTranslation();
+  return Joi.object({
+    email: Joi.string()
+      .email({ tlds: false })
+      .required()
+      .messages({
+        "string.email": `${t("email_valid.label")}`,
+        "string.empty": `${t("email_required.label")}`,
+      }),
+    password: Joi.string()
+      .trim()
+      .required()
+      .messages({
+        "string.empty": `${t("password_required.label")}`,
+      }),
   });
+};
 
 export default useLoginFormValidation;
