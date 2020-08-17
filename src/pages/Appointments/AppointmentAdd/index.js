@@ -9,8 +9,10 @@ import useAppointmentFormValidation from "hooks/useAppointmentFormValidation";
 import { postNew } from "services/appointmentService";
 import useFetch from "hooks/useFetch";
 import PageLoading from "components/PageLoading";
+import { useTranslation } from "react-i18next";
 
 const AppointmentAdd = () => {
+  const { t } = useTranslation();
   const formValidation = useAppointmentFormValidation();
   const { register, handleSubmit, errors, control, setValue } = useForm({
     resolver: joiResolver(formValidation),
@@ -61,7 +63,7 @@ const AppointmentAdd = () => {
         <PageLoading />
       ) : (
         <Fragment>
-          <PageTitle title="ADD APPOINTMENT" />
+          <PageTitle title={t("add_appointment.label")} />
           <AppointmentAddForm
             onSubmitForm={onSubmitForm}
             handleSelectChange={handleSelectChange}

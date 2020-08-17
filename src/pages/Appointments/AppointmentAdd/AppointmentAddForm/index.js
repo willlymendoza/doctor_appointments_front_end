@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import CardContainer from "components/CardContainer";
 import Select from "react-select";
+import { useTranslation } from "react-i18next";
 
 const AppointmentAddForm = ({
   onSubmitForm,
@@ -14,6 +15,7 @@ const AppointmentAddForm = ({
   control,
   Controller,
 }) => {
+  const { t } = useTranslation();
   const customSelectStyles = {
     valueContainer: () => ({
       height: 37,
@@ -26,10 +28,10 @@ const AppointmentAddForm = ({
 
   return (
     <div className="form-container add-form-container">
-      <CardContainer title="Appointment Info" color="warning_color">
+      <CardContainer title={t("appointment_info.label")} color="warning_color">
         <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
           <div className="form-group full-width">
-            <label>Patient</label>
+            <label>{t("patient.label")}</label>
             <Controller
               control={control}
               name="patient_id"
@@ -53,7 +55,7 @@ const AppointmentAddForm = ({
             </span>
           </div>
           <div className="form-group full-width">
-            <label>Doctor</label>
+            <label>{t("doctor.label")}</label>
             <Controller
               name="doctor_id"
               control={control}
@@ -78,28 +80,28 @@ const AppointmentAddForm = ({
             </span>
           </div>
           <div className="form-group full-width">
-            <label>Observations</label>
+            <label>{t("observations.label")}</label>
             <textarea name="observations" ref={register} />
             <span className="form-error-message">
               {errors?.observations?.message}
             </span>
           </div>
           <div className="form-group">
-            <label>Date</label>
+            <label>{t("date.label")}</label>
             <input type="date" name="appointment_date" ref={register} />
             <span className="form-error-message">
               {errors?.appointment_date?.message}
             </span>
           </div>
           <div className="form-group">
-            <label>Hour</label>
+            <label>{t("hour.label")}</label>
             <input type="time" name="hour" ref={register} />
             <span className="form-error-message">{errors?.hour?.message}</span>
           </div>
 
           <div className="form-group button-container">
             <button className="button button-right bg-warning-color">
-              add
+              {t("add.label")}
             </button>
           </div>
         </form>

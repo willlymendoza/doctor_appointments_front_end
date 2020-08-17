@@ -4,6 +4,7 @@ import CardContainer from "components/CardContainer";
 import CustomPagination from "components/CustomPagination";
 import { NavLink } from "react-router-dom";
 import Table from "components/Table";
+import { useTranslation } from "react-i18next";
 import "./styles.scss";
 
 const AppointmentList = ({
@@ -11,6 +12,7 @@ const AppointmentList = ({
   handlePageChange,
   activePage,
 }) => {
+  const { t } = useTranslation();
   return (
     <Fragment>
       <NavLink to="/appointments/add">
@@ -19,22 +21,26 @@ const AppointmentList = ({
           className="button bg-warning-color"
           style={{ marginBottom: 10 }}
         >
-          New
+          {t("new.label")}
         </button>
       </NavLink>
-      <CardContainer title="List Of Appointments" color="warning_color">
+      <CardContainer title={t("appointments_list.label")} color="warning_color">
         <Table
           labels={[
-            { label: "Date", value: "appointment_date", type: "date" },
-            { label: "Hour", value: "hour" },
             {
-              label: "Patient",
+              label: `${t("date.label")}`,
+              value: "appointment_date",
+              type: "date",
+            },
+            { label: `${t("hour.label")}`, value: "hour" },
+            {
+              label: `${t("patient.label")}`,
               value: "patient",
               child: ["first_name", "last_name"],
               type: "object",
             },
             {
-              label: "Doctor",
+              label: `${t("doctor.label")}`,
               value: "doctor",
               child: ["name", "last_name"],
               type: "object",

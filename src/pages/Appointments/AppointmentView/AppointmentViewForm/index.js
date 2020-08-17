@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import CardContainer from "components/CardContainer";
 import Select from "react-select";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 
 const AppointmentViewForm = ({
   patientsList,
@@ -19,6 +20,7 @@ const AppointmentViewForm = ({
   Controller,
   setValue,
 }) => {
+  const { t } = useTranslation();
   const customSelectStyles = {
     valueContainer: () => ({
       height: 37,
@@ -40,10 +42,10 @@ const AppointmentViewForm = ({
 
   return (
     <div className="form-container">
-      <CardContainer title="Appointment Info" color="warning_color">
+      <CardContainer title={t("appointment_info.label")} color="warning_color">
         <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
           <div className="form-group full-width">
-            <label>Patient</label>
+            <label>{t("patient.label")}</label>
             <Controller
               control={control}
               name="patient_id"
@@ -71,7 +73,7 @@ const AppointmentViewForm = ({
             </span>
           </div>
           <div className="form-group full-width">
-            <label>Doctor</label>
+            <label>{t("doctor.label")}</label>
             <Controller
               name="doctor_id"
               control={control}
@@ -99,7 +101,7 @@ const AppointmentViewForm = ({
             </span>
           </div>
           <div className="form-group full-width">
-            <label>Observations</label>
+            <label>{t("observations.label")}</label>
             <textarea
               name="observations"
               disabled={disabledInput}
@@ -111,7 +113,7 @@ const AppointmentViewForm = ({
             </span>
           </div>
           <div className="form-group">
-            <label>Date</label>
+            <label>{t("date.label")}</label>
             <input
               type="date"
               name="appointment_date"
@@ -126,7 +128,7 @@ const AppointmentViewForm = ({
             </span>
           </div>
           <div className="form-group">
-            <label>Hour</label>
+            <label>{t("hour.label")}</label>
             <input
               type="time"
               name="hour"
@@ -144,7 +146,7 @@ const AppointmentViewForm = ({
                   type="submit"
                   className="button button-right bg-warning-color"
                 >
-                  save changes
+                  {t("save_changes.label")}
                 </button>
               ) : (
                 <button
@@ -152,7 +154,7 @@ const AppointmentViewForm = ({
                   className="button button-right bg-warning-color"
                   onClick={handleEditClick}
                 >
-                  edit
+                  {t("edit.label")}
                 </button>
               )}
             </div>
