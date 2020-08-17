@@ -22,29 +22,6 @@ import AppointmentView from "pages/Appointments/AppointmentView";
 import Error404 from "components/Error404";
 import "./i18n";
 
-import { useTranslation } from "react-i18next";
-
-const LanguageSelector = () => {
-  const { i18n } = useTranslation();
-
-  const changeLanguage = (e) => {
-    i18n.changeLanguage(e.target.value);
-  };
-
-  return (
-    <div onChange={changeLanguage}>
-      <label>
-        En
-        <input type="radio" value="en" name="language" defaultChecked />
-      </label>
-      <label>
-        Es
-        <input type="radio" value="es" name="language" />
-      </label>
-    </div>
-  );
-};
-
 function App() {
   return (
     <Provider store={store}>
@@ -52,7 +29,6 @@ function App() {
         <div className="container">
           <Suspense fallback={null}>
             <Router>
-              <LanguageSelector />
               <Header />
 
               <Main>
