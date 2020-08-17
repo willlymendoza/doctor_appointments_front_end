@@ -16,7 +16,7 @@ const LoginForm = ({
   return (
     <Fragment>
       <div className="form-container login-container">
-        <CardContainer title="Account Login" color="secondary_color">
+        <CardContainer title={t("login.label")} color="secondary_color">
           <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
             <div className="form-group full-width">
               <label>E-mail</label>
