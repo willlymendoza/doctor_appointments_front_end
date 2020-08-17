@@ -3,9 +3,11 @@ import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogoutAction } from "../../redux/authDuck";
+import { useTranslation } from "react-i18next";
 import "./styles.scss";
 
 const NavBar = ({ handleClick, showMenu }) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -28,17 +30,17 @@ const NavBar = ({ handleClick, showMenu }) => {
           to="/appointments"
           onClick={handleClick}
         >
-          Appointments
+          {t("appointments.label")}
         </NavLink>
         <NavLink
           activeClassName="active-link"
           to="/patients"
           onClick={handleClick}
         >
-          Patients
+          {t("patients.label")}
         </NavLink>
         <NavLink to="/" onClick={handleLogout}>
-          Logout
+          {t("logout.label")}
         </NavLink>
       </nav>
     </Fragment>
