@@ -2,8 +2,10 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import dateService from "../../services/dateService";
+import { useTranslation } from "react-i18next";
 
 const Table = ({ labels, data, actions }) => {
+  const { t } = useTranslation();
   return (
     <Fragment>
       <div className="table-grid table-header">
@@ -11,11 +13,11 @@ const Table = ({ labels, data, actions }) => {
           <label key={index}>{item.label}</label>
         ))}
 
-        {actions ? <label>Actions</label> : ""}
+        {actions ? <label>{t("actions.label")}</label> : ""}
       </div>
 
       {(!data || !data.length) && (
-        <div className="table-grid full-width">No records found</div>
+        <div className="table-grid full-width">{t("no_records.label")}</div>
       )}
 
       {data.map((item) => (
