@@ -7,8 +7,10 @@ import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers";
 import usePatientFormValidation from "hooks/usePatientFormValidation";
 import { postNew } from "services/patientService";
+import { useTranslation } from "react-i18next";
 
 const PatientAdd = () => {
+  const { t } = useTranslation();
   const formValidation = usePatientFormValidation();
   const [requestError, setRequestError] = useState("");
   const userToken = useSelector((store) => store.authData.userToken);
@@ -34,7 +36,7 @@ const PatientAdd = () => {
 
   return (
     <Fragment>
-      <PageTitle title="ADD PATIENT" />
+      <PageTitle title={t("add_patient.label")} />
       <PatientAddForm
         onSubmitForm={onSubmitForm}
         register={register}

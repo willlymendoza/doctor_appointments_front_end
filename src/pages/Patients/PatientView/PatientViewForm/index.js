@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CardContainer from "components/CardContainer";
+import { useTranslation } from "react-i18next";
 
 const PatientViewForm = ({
   patientInfo,
@@ -12,12 +13,13 @@ const PatientViewForm = ({
   errors,
   requestError,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="form-container patient-form">
-      <CardContainer title="Patient Info" color="secondary_color">
+      <CardContainer title={t("patient_info.label")} color="secondary_color">
         <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
           <div className="form-group">
-            <label>First Name</label>
+            <label>{t("first_name.label")}</label>
             <input
               name="first_name"
               disabled={disabledInput}
@@ -29,7 +31,7 @@ const PatientViewForm = ({
             </span>
           </div>
           <div className="form-group">
-            <label>Last Name</label>
+            <label>{t("last_name.label")}</label>
             <input
               name="last_name"
               disabled={disabledInput}
@@ -41,7 +43,7 @@ const PatientViewForm = ({
             </span>
           </div>
           <div className="form-group">
-            <label>Personal Document ID</label>
+            <label>{t("personal_id.label")}</label>
             <input
               name="personal_document_id"
               disabled={disabledInput}
@@ -53,7 +55,7 @@ const PatientViewForm = ({
             </span>
           </div>
           <div className="form-group">
-            <label>Phone Number</label>
+            <label>{t("phone_number.label")}</label>
             <input
               name="phone_number"
               disabled={disabledInput}
@@ -65,7 +67,7 @@ const PatientViewForm = ({
             </span>
           </div>
           <div className="form-group">
-            <label>E-mail</label>
+            <label>{t("email.label")}</label>
             <input
               name="email"
               disabled={disabledInput}
@@ -75,7 +77,7 @@ const PatientViewForm = ({
             <span className="form-error-message">{errors?.email?.message}</span>
           </div>
           <div className="form-group">
-            <label>City</label>
+            <label>{t("city.label")}</label>
             <input
               name="city"
               disabled={disabledInput}
@@ -85,7 +87,7 @@ const PatientViewForm = ({
             <span className="form-error-message">{errors?.city?.message}</span>
           </div>
           <div className="form-group">
-            <label>Address</label>
+            <label>{t("address.label")}</label>
             <input
               name="address"
               disabled={disabledInput}
@@ -97,7 +99,7 @@ const PatientViewForm = ({
             </span>
           </div>
           <div className="form-group">
-            <label>Age</label>
+            <label>{t("age.label")}</label>
             <input
               name="age"
               disabled={disabledInput}
@@ -107,7 +109,7 @@ const PatientViewForm = ({
             <span className="form-error-message">{errors?.age?.message}</span>
           </div>
           <div className="form-group">
-            <label>Sex</label>
+            <label>{t("sex.label")}</label>
             <input
               name="sex"
               disabled={disabledInput}
@@ -132,7 +134,7 @@ const PatientViewForm = ({
                   type="submit"
                   className="button button-right bg-secondary-color"
                 >
-                  save changes
+                  {t("save_changes.label")}
                 </button>
               ) : (
                 <button
@@ -140,7 +142,7 @@ const PatientViewForm = ({
                   className="button button-right bg-secondary-color"
                   onClick={handleEditClick}
                 >
-                  edit
+                  {t("edit.label")}
                 </button>
               )}
             </div>

@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import "./styles.scss";
 import CardContainer from "components/CardContainer";
 import dateService from "services/dateService";
+import { useTranslation } from "react-i18next";
 
 const PatientViewAppointmentList = ({ appointmentsInfo }) => {
+  const { t } = useTranslation();
   return (
-    <CardContainer title="Appointments" color="warning_color">
+    <CardContainer title={t("appointments.label")} color="warning_color">
       <div className="list-container">
         {appointmentsInfo.map((item) => (
           <div key={item._id}>

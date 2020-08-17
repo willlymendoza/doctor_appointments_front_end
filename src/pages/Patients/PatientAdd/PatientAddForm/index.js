@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CardContainer from "components/CardContainer";
+import { useTranslation } from "react-i18next";
 
 const PatientAddForm = ({
   onSubmitForm,
@@ -9,12 +10,13 @@ const PatientAddForm = ({
   errors,
   requestError,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="form-container patient-form add-form-container">
-      <CardContainer title="Patient Info" color="secondary_color">
+      <CardContainer title={t("patient_info.label")} color="secondary_color">
         <form className="form" onSubmit={handleSubmit(onSubmitForm)}>
           <div className="form-group">
-            <label>First Name</label>
+            <label>{t("first_name.label")}</label>
             <input name="first_name" ref={register} />
             <span className="form-error-message">
               {errors?.first_name?.message}
@@ -22,50 +24,50 @@ const PatientAddForm = ({
           </div>
 
           <div className="form-group">
-            <label>Last Name</label>
+            <label>{t("last_name.label")}</label>
             <input name="last_name" ref={register} />
             <span className="form-error-message">
               {errors?.last_name?.message}
             </span>
           </div>
           <div className="form-group">
-            <label>Personal Document ID</label>
+            <label>{t("personal_id.label")}</label>
             <input name="personal_document_id" ref={register} />
             <span className="form-error-message">
               {errors?.personal_document_id?.message}
             </span>
           </div>
           <div className="form-group">
-            <label>Phone Number</label>
+            <label>{t("phone_number.label")}</label>
             <input name="phone_number" ref={register} />
             <span className="form-error-message">
               {errors?.phone_number?.message}
             </span>
           </div>
           <div className="form-group">
-            <label>E-mail</label>
+            <label>{t("email.label")}</label>
             <input name="email" ref={register} />
             <span className="form-error-message">{errors?.email?.message}</span>
           </div>
           <div className="form-group">
-            <label>City</label>
+            <label>{t("city.label")}</label>
             <input name="city" ref={register} />
             <span className="form-error-message">{errors?.city?.message}</span>
           </div>
           <div className="form-group">
-            <label>Address</label>
+            <label>{t("address.label")}</label>
             <input name="address" ref={register} />
             <span className="form-error-message">
               {errors?.address?.message}
             </span>
           </div>
           <div className="form-group">
-            <label>Age</label>
+            <label>{t("age.label")}</label>
             <input name="age" ref={register} />
             <span className="form-error-message">{errors?.age?.message}</span>
           </div>
           <div className="form-group">
-            <label>Sex (m, f)</label>
+            <label>{t("sex.label")} (m, f)</label>
             <input name="sex" ref={register} />
             <span className="form-error-message">{errors?.sex?.message}</span>
           </div>
@@ -83,7 +85,7 @@ const PatientAddForm = ({
               type="submit"
               className="button button-right bg-secondary-color"
             >
-              add
+              {t("add.label")}
             </button>
           </div>
         </form>
