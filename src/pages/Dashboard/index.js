@@ -7,8 +7,10 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Table from "components/Table";
 import useFetch from "hooks/useFetch";
+import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const userToken = useSelector((store) => store.authData.userToken);
   const appointmentsList = useFetch({
     url: "/appointments/recent/5",
@@ -41,17 +43,17 @@ const Dashboard = () => {
 
           <div className="dashboard-cards">
             <DashBoardCard
-              title="Patients"
+              title={t("patients.label")}
               color="secondary_color"
               quantity={parseInt(totalPatients.response.total) || 0}
             />
             <DashBoardCard
-              title="Appointments"
+              title={t("appointments.label")}
               color="info_color"
               quantity={parseInt(totalAppointments.response.total) || 0}
             />
             <DashBoardCard
-              title="Today's Appointments"
+              title={t("today_appointments.label")}
               color="warning_color"
               quantity={parseInt(todayAppointments.response.total) || 0}
             />
@@ -59,21 +61,25 @@ const Dashboard = () => {
 
           <div className="dashboard-tables">
             <CardContainer
-              title="Recent Registered Appointments"
+              title={t("recent_appointments.label")}
               color="warning_color"
             >
               <Table
                 labels={[
-                  { label: "Date", value: "appointment_date", type: "date" },
-                  { label: "Hour", value: ["hour"] },
                   {
-                    label: "Patient",
+                    label: `${t("date.label")}`,
+                    value: "appointment_date",
+                    type: "date",
+                  },
+                  { label: `${t("hour.label")}`, value: ["hour"] },
+                  {
+                    label: `${t("patient.label")}`,
                     value: "patient",
                     child: ["first_name", "last_name"],
                     type: "object",
                   },
                   {
-                    label: "Doctor",
+                    label: `${t("doctor.label")}`,
                     value: "doctor",
                     child: ["name", "last_name"],
                     type: "object",
@@ -86,21 +92,24 @@ const Dashboard = () => {
                   className="button button-right bg-warning-color"
                   to="/appointments"
                 >
-                  view full list
+                  {t("view_full_list.label")}
                 </Link>
               </div>
             </CardContainer>
 
             <CardContainer
-              title="Recent Registered Patients"
+              title={t("recent_patients.label")}
               color="secondary_color"
             >
               <Table
                 labels={[
-                  { label: "Patient", value: ["first_name", "last_name"] },
-                  { label: "E-mail", value: "email" },
                   {
-                    label: "Registered Date",
+                    label: `${t("patient.label")}`,
+                    value: ["first_name", "last_name"],
+                  },
+                  { label: `${t("email.label")}`, value: "email" },
+                  {
+                    label: `${t("registered_date")}`,
                     value: "created_at",
                     type: "date",
                   },
@@ -112,7 +121,7 @@ const Dashboard = () => {
                   className="button button-right bg-secondary-color"
                   to="/patients"
                 >
-                  view full list
+                  {t("view_full_list.label")}
                 </Link>
               </div>
             </CardContainer>
